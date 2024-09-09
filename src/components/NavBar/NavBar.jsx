@@ -35,30 +35,36 @@ const NavBar = () => {
             <span>/</span>
             <a href="/">Explore now</a>
           </div>
-          <div
-            className="hidden max-lg:block cursor-pointer"
-            onClick={() => {
-              setIsMenuOpen(!isMenuOpen);
-            }}
-          >
-            <RxHamburgerMenu className="text-4xl" />
-          </div>
+          {!isMenuOpen && (
+            <div
+              className="hidden max-lg:block cursor-pointer"
+              onClick={() => {
+                setIsMenuOpen(!isMenuOpen);
+              }}
+            >
+              <RxHamburgerMenu className="text-4xl" />
+            </div>
+          )}
         </nav>
       </header>
       {isMenuOpen && (
         <div>
-          <nav className="fixed top-0 right-0 left-0 bottom-0 lg:bottom-auto bg-slate-100  ">
+          <nav className="fixed w-1/2 top-0 right-0 left-0 bottom-0 lg:bottom-auto bg-slate-100  ">
             <div
-              className="hidden max-lg:block fixed right-0  px-8 py-4 cursor-pointer"
+              className="hidden max-lg:block fixed right-0  px-4 py-2 cursor-pointer"
               onClick={() => {
                 setIsMenuOpen(!isMenuOpen);
               }}
             >
               <AiOutlineClose className="text-4xl" />
             </div>
-            <ul className=" lg:hidden flex flex-col items-center justify-center h-full ">
+            
+            <ul className=" lg:hidden h-full p-4">
+            <li className="text-4xl mb-4 font-bold">
+              Logo
+            </li>
               {navLinks.map((item) => (
-                <li key={item.label}>
+                <li key={item.label} onClick={()=>setIsMenuOpen(false)} className="my-2">
                   <a
                     href={item.href}
                     className="font-montserrat leading-normal text-lg text-slate-gray"
