@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const Login = () => {
   return (
     <div className="bg-gray-50 font-[sans-serif]">
@@ -158,9 +160,9 @@ const Login = () => {
               </button>
               <p className="text-gray-800 text-sm !mt-8 text-center">
                 Do not have an account?{" "}
-                <a className="text-blue-600 hover:underline ml-1 whitespace-nowrap font-semibold">
+                <Link to="/sign-up" className="text-blue-600 hover:underline ml-1 whitespace-nowrap font-semibold">
                   Register here
-                </a>
+                </Link>
               </p>
             </form>
           </div>
