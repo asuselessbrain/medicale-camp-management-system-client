@@ -1,6 +1,9 @@
 import { Link } from "react-router-dom";
+import useAuth from "../../../hooks/useAuth";
 
 const Registration = () => {
+
+    const {googleSignIn} = useAuth()
   return (
     <div className="font-[sans-serif] bg-slate-50 w-full flex items-center py-10 min-h-screen">
       <div className="w-full">
@@ -217,6 +220,8 @@ const Registration = () => {
         <div className="flex max-w-md mx-auto flex-col border-opacity-100 my-1">
           <div className="divider">OR</div>
         </div>
+
+        {/* signIn with google */}
 
         <button
           type="button"
