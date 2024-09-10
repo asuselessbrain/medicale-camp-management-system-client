@@ -1,7 +1,50 @@
 import { Link } from "react-router-dom";
 import Google from "../../../components/socialMediaLogin/Google";
+import { toast } from "react-toastify";
+import useAuth from "../../../hooks/useAuth";
 
 const Registration = () => {
+  const { logInWithEmail } = useAuth();
+  const handleSignUp = async (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const name = form.name.value;
+    const email = form.email.value;
+    const phoneNumber = form.phoneNumber.value;
+    const password = form.password.value;
+    const confirmPassword = form.confirmPassword.value;
+    const image = form.image.files[0];
+
+    if (password !== confirmPassword) {
+      toast.error("Password and Confirm Password Does not Match!");
+      return;
+    }
+
+    // const regex = /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#])[A-Za-z\d@$!%*?&#]{8,}$/;
+
+    // if (!regex.test(password)) {
+    //   toast.error(
+    //     "Password must contain a upperCase, LowerCase, a Number and a special character"
+    //   );
+    //   return;
+    // }
+
+    const userInfo = {
+      name,
+      email,
+      phoneNumber,
+      password,
+      confirmPassword,
+      image,
+    };
+
+    const res = await logInWithEmail(email, password);
+
+    if(res.user){
+      toast.success("SignUp Successful!")
+    }
+    console.log(res)
+  };
   return (
     <div className="font-[sans-serif] bg-slate-50 w-full flex items-center py-10 min-h-screen">
       <div className="w-full">
@@ -19,7 +62,7 @@ const Registration = () => {
             </h3>
           </div>
 
-          <form className="space-y-4">
+          <form onSubmit={handleSignUp} className="space-y-4">
             {/* name input field */}
 
             <div>
@@ -28,7 +71,6 @@ const Registration = () => {
                 <input
                   name="name"
                   type="text"
-                  required
                   className="text-gray-800 bg-white border border-gray-300 w-full text-sm px-4 py-2.5 rounded-md outline-blue-500"
                   placeholder="Enter name"
                 />
@@ -58,7 +100,6 @@ const Registration = () => {
                 <input
                   name="email"
                   type="email"
-                  required
                   className="text-gray-800 bg-white border border-gray-300 w-full text-sm px-4 py-2.5 rounded-md outline-blue-500"
                   placeholder="Enter email"
                 />
@@ -104,7 +145,6 @@ const Registration = () => {
                 <input
                   name="phoneNumber"
                   type="number"
-                  required
                   className="text-gray-800 bg-white border border-gray-300 w-full text-sm px-4 py-2.5 rounded-md outline-blue-500"
                   placeholder="Enter Phone Number"
                 />
@@ -150,7 +190,6 @@ const Registration = () => {
                 <input
                   name="password"
                   type="password"
-                  required
                   className="text-gray-800 bg-white border border-gray-300 w-full text-sm px-4 py-2.5 rounded-md outline-blue-500"
                   placeholder="Enter password"
                 />
@@ -179,7 +218,6 @@ const Registration = () => {
                 <input
                   name="confirmPassword"
                   type="password"
-                  required
                   className="text-gray-800 bg-white border border-gray-300 w-full text-sm px-4 py-2.5 rounded-md outline-blue-500"
                   placeholder="Confirm password"
                 />
@@ -205,13 +243,13 @@ const Registration = () => {
                 Profile Picture
               </label>
               <div className="relative flex items-center">
-                <input type="file" className="file-input w-full" />
+                <input name="image" type="file" className="file-input w-full" />
               </div>
             </div>
 
             <div className="!mt-8">
               <button
-                type="button"
+                type="submit"
                 className="w-full py-3 px-4 tracking-wider text-sm rounded-md text-white bg-gray-700 hover:bg-gray-800 focus:outline-none"
               >
                 Create an account
