@@ -13,8 +13,8 @@ const NavBar = () => {
 
   return (
     <>
-      <header className="sm:px-8 px-4 py-2 z-10 w-full">
-        <nav className="flex justify-between items-center max-container">
+      <header className="sm:px-8 px-4 py-6 bg-gray-800 text-white z-10 w-full">
+        <nav className="flex justify-between items-center">
           <a href="/" className="text-3xl font-bold">
             Logo
           </a>
@@ -30,11 +30,7 @@ const NavBar = () => {
               </li>
             ))}
           </ul>
-          <div className="flex gap-2 text-lg leading-normal font-medium font-montserrat max-lg:hidden wide:mr-24">
-            <a href="/">Sign in</a>
-            <span>/</span>
-            <a href="/">Explore now</a>
-          </div>
+          <button className="font-montserrat leading-normal text-lg text-slate-gray bg-green-400 px-4 py-3 rounded-lg list-none">Join US</button>
           {!isMenuOpen && (
             <div
               className="hidden max-lg:block cursor-pointer"
@@ -51,20 +47,22 @@ const NavBar = () => {
         <div>
           <nav className="fixed w-1/2 top-0 right-0 left-0 z-10 bottom-0 lg:bottom-auto bg-slate-100">
             <div
-              className="hidden max-lg:block fixed right-0  px-4 py-2 cursor-pointer"
+              className="hidden max-lg:block fixed right-0  px-4 py-6 cursor-pointer"
               onClick={() => {
                 setIsMenuOpen(!isMenuOpen);
               }}
             >
-              <AiOutlineClose className="text-4xl" />
+              <AiOutlineClose className="text-4xl text-white" />
             </div>
-            
+
             <ul className=" lg:hidden h-full p-4">
-            <li className="text-4xl mb-4 font-bold">
-              Logo
-            </li>
+              <li className="text-4xl mb-4 font-bold">Logo</li>
               {navLinks.map((item) => (
-                <li key={item.label} onClick={()=>setIsMenuOpen(false)} className="my-2">
+                <li
+                  key={item.label}
+                  onClick={() => setIsMenuOpen(false)}
+                  className="my-2"
+                >
                   <a
                     href={item.href}
                     className="font-montserrat leading-normal text-lg text-slate-gray"
@@ -73,6 +71,7 @@ const NavBar = () => {
                   </a>
                 </li>
               ))}
+                <li className="font-montserrat leading-normal text-lg text-slate-gray bg-green-400 px-4 py-3 rounded-lg">Join US</li>
             </ul>
           </nav>
         </div>
