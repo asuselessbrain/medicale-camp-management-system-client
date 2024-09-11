@@ -1,7 +1,22 @@
 import { Link } from "react-router-dom";
 import Google from "../../../components/socialMediaLogin/Google";
+import useAuth from "../../../hooks/useAuth";
+import { toast } from "react-toastify";
 
 const Login = () => {
+  const { signInWithEmail } = useAuth();
+
+  const handleSignIn = async (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const email = form.email.value;
+    const password = form.password.value;
+
+    const res = await signInWithEmail(email, password)
+    if(res.user){
+      toast.success("Login Successfully!")
+    }
+  };
   return (
     <div className="bg-gray-50 font-[sans-serif]">
       <div className="min-h-screen flex flex-col items-center justify-center py-6 px-4">
@@ -18,18 +33,18 @@ const Login = () => {
             <h2 className="text-gray-800 text-center text-2xl font-bold">
               Sign in
             </h2>
-            <form className="mt-8 space-y-4">
+            <form onSubmit={handleSignIn} className="mt-8 space-y-4">
               <div>
                 <label className="text-gray-800 text-sm mb-2 block">
-                  User name
+                  Email
                 </label>
                 <div className="relative flex items-center">
                   <input
-                    name="username"
-                    type="text"
+                    name="email"
+                    type="email"
                     required
                     className="w-full text-gray-800 text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600"
-                    placeholder="Enter user name"
+                    placeholder="Enter your email"
                   />
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -103,27 +118,30 @@ const Login = () => {
 
               <div className="!mt-8">
                 <button
-                  type="button"
+                  type="submit"
                   className="w-full py-3 px-4 text-sm tracking-wide rounded-lg text-white bg-blue-600 hover:bg-blue-700 focus:outline-none"
                 >
                   Sign in
                 </button>
               </div>
-              <div className="inline-flex items-center justify-center w-full">
-                <hr className="w-64 h-px my-8 bg-gray-200 border-0 dark:bg-gray-700" />
-                <span className="absolute px-3 font-medium text-gray-900 -translate-x-1/2 bg-white left-1/2 dark:text-white dark:bg-gray-900">
-                  or
-                </span>
-              </div>
-
-              <Google />
-              <p className="text-gray-800 text-sm !mt-8 text-center">
-                Do not have an account?{" "}
-                <Link to="/sign-up" className="text-blue-600 hover:underline ml-1 whitespace-nowrap font-semibold">
-                  Register here
-                </Link>
-              </p>
             </form>
+            <div className="inline-flex items-center justify-center w-full">
+              <hr className="w-64 h-px my-8 bg-gray-200 border-0 dark:bg-gray-700" />
+              <span className="absolute px-3 font-medium text-gray-900 -translate-x-1/2 bg-white left-1/2 dark:text-white dark:bg-gray-900">
+                or
+              </span>
+            </div>
+
+            <Google />
+            <p className="text-gray-800 text-sm !mt-8 text-center">
+              Do not have an account?{" "}
+              <Link
+                to="/sign-up"
+                className="text-blue-600 hover:underline ml-1 whitespace-nowrap font-semibold"
+              >
+                Register here
+              </Link>
+            </p>
           </div>
         </div>
       </div>
