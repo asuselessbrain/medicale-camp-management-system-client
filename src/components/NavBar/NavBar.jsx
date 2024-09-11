@@ -4,6 +4,7 @@ import { AiOutlineClose } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import { toast } from "react-toastify";
+import logo from "../../assets/images/logo.png";
 
 const NavBar = () => {
   const { logOut, user } = useAuth();
@@ -25,9 +26,10 @@ const NavBar = () => {
     <div className="fixed z-10 w-full max-w-[1440px]">
       <header className="sm:px-8 px-4 py-6 bg-gray-800 text-white z-10 w-full">
         <nav className="flex justify-between items-center">
-          <a href="/" className="text-3xl font-bold">
-            Logo
-          </a>
+          <Link to="/" className="flex items-center gap-2">
+            <img src={logo} className="w-16" alt="logo" />
+            <p className="text-3xl font-bold">MediCare</p>
+          </Link>
           <ul className="flex-1 flex justify-center items-center gap-16 max-lg:hidden">
             {navLinks.map((item) => (
               <li key={item.label}>
@@ -79,7 +81,12 @@ const NavBar = () => {
             </div>
 
             <ul className=" lg:hidden h-full p-4">
-              <li className="text-4xl mb-4 font-bold">Logo</li>
+              <li className="text-2xl mb-4 font-bold">
+                <Link to="/" className="flex items-center gap-2">
+                  <img src={logo} className="h-12" alt="" />
+                  <p>MediCare</p>
+                </Link>
+              </li>
               {navLinks.map((item) => (
                 <li
                   key={item.label}
