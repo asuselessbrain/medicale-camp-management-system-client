@@ -22,7 +22,7 @@ const NavBar = () => {
   ];
 
   return (
-    <>
+    <div className="fixed z-10 w-full max-w-[1440px]">
       <header className="sm:px-8 px-4 py-6 bg-gray-800 text-white z-10 w-full">
         <nav className="flex justify-between items-center">
           <a href="/" className="text-3xl font-bold">
@@ -43,13 +43,13 @@ const NavBar = () => {
           {user ? (
             <button
               onClick={handleLogOut}
-              className="font-montserrat leading-normal text-lg text-slate-gray bg-red-500 px-4 py-3 rounded-lg list-none"
+              className="font-montserrat leading-normal text-lg max-lg:hidden text-slate-gray bg-red-500 px-4 py-3 rounded-lg list-none"
             >
               Sign Out
             </button>
           ) : (
             <Link to="/sign-in">
-              <button className="font-montserrat leading-normal text-lg text-slate-gray bg-green-400 px-4 py-3 rounded-lg list-none">
+              <button className="font-montserrat leading-normal max-lg:hidden text-lg text-slate-gray bg-green-400 px-4 py-3 rounded-lg list-none">
                 Join US
               </button>
             </Link>
@@ -94,14 +94,28 @@ const NavBar = () => {
                   </a>
                 </li>
               ))}
-              <li className="font-montserrat leading-normal text-lg text-slate-gray bg-green-400 px-4 py-3 rounded-lg">
-                Join US
+
+              <li onClick={() => setIsMenuOpen(false)}>
+                {user ? (
+                  <button
+                    onClick={handleLogOut}
+                    className="font-montserrat leading-normal text-lg text-slate-gray bg-red-500 px-4 py-3 rounded-lg list-none"
+                  >
+                    Sign Out
+                  </button>
+                ) : (
+                  <Link to="/sign-in">
+                    <button className="font-montserrat leading-normal text-lg text-slate-gray bg-green-400 px-4 py-3 rounded-lg list-none">
+                      Join US
+                    </button>
+                  </Link>
+                )}
               </li>
             </ul>
           </nav>
         </div>
       )}
-    </>
+    </div>
   );
 };
 

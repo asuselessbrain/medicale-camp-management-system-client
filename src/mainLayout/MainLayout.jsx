@@ -3,13 +3,15 @@ import NavBar from "../components/NavBar/NavBar";
 import ScrollToTop from "../components/ScrollToTop/ScrollToTop";
 
 const MainLayout = () => {
-    return (
-        <div className="max-w-[1440px] mx-auto">
-            <NavBar />
-            <ScrollToTop />
-            <Outlet />
-        </div>
-    );
+  return (
+    <div className="max-w-[1440px] mx-auto">
+      <div className="h-[84px] lg:h-[99px]">
+        <NavBar />
+      </div>
+      <ScrollToTop />
+      <Outlet />
+    </div>
+  );
 };
 
 export default MainLayout;
