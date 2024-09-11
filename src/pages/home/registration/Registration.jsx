@@ -1,10 +1,12 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Google from "../../../components/socialMediaLogin/Google";
 import { toast } from "react-toastify";
 import useAuth from "../../../hooks/useAuth";
+import axios from "axios";
 
 const Registration = () => {
-  const { logInWithEmail } = useAuth();
+  const { logInWithEmail, updateUser } = useAuth();
+  const navigation = useNavigate();
   const handleSignUp = async (e) => {
     e.preventDefault();
     const form = e.target;
@@ -29,6 +31,21 @@ const Registration = () => {
     //   return;
     // }
 
+    const imagebbUrl = `https://api.imgbb.com/1/upload?key=${
+      import.meta.env.VITE_imagebb_api
+    }`;
+
+    const resImagebb = await axios.post(
+      imagebbUrl,
+      { image },
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    );
+    const imageUrl = resImagebb.data.data.display_url;
+
     const userInfo = {
       name,
       email,
@@ -38,12 +55,12 @@ const Registration = () => {
       image,
     };
 
-    const res = await logInWithEmail(email, password);
-
-    if(res.user){
-      toast.success("SignUp Successful!")
-    }
-    console.log(res)
+    logInWithEmail(email, password).then(() => {
+      updateUser(name, imageUrl).then(() => {
+        toast.success("SignUp Successful!");
+        navigation("/")
+      });
+    });
   };
   return (
     <div className="font-[sans-serif] bg-slate-50 w-full flex items-center py-10 min-h-screen">

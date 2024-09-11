@@ -2,9 +2,18 @@ import React, { useState } from "react";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { AiOutlineClose } from "react-icons/ai";
 import { Link } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
+import { toast } from "react-toastify";
 
 const NavBar = () => {
+  const { logOut, user } = useAuth();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const handleLogOut = () => {
+    logOut().then(() => {
+      toast.success("Logout is successful!");
+    });
+  };
   const navLinks = [
     { href: "#home", label: "Home" },
     { href: "#about-us", label: "About Us" },
@@ -31,7 +40,20 @@ const NavBar = () => {
               </li>
             ))}
           </ul>
-          <Link to="/sign-in"><button className="font-montserrat leading-normal text-lg text-slate-gray bg-green-400 px-4 py-3 rounded-lg list-none">Join US</button></Link>
+          {user ? (
+            <button
+              onClick={handleLogOut}
+              className="font-montserrat leading-normal text-lg text-slate-gray bg-red-500 px-4 py-3 rounded-lg list-none"
+            >
+              Sign Out
+            </button>
+          ) : (
+            <Link to="/sign-in">
+              <button className="font-montserrat leading-normal text-lg text-slate-gray bg-green-400 px-4 py-3 rounded-lg list-none">
+                Join US
+              </button>
+            </Link>
+          )}
           {!isMenuOpen && (
             <div
               className="hidden max-lg:block cursor-pointer"
@@ -72,7 +94,9 @@ const NavBar = () => {
                   </a>
                 </li>
               ))}
-                <li className="font-montserrat leading-normal text-lg text-slate-gray bg-green-400 px-4 py-3 rounded-lg">Join US</li>
+              <li className="font-montserrat leading-normal text-lg text-slate-gray bg-green-400 px-4 py-3 rounded-lg">
+                Join US
+              </li>
             </ul>
           </nav>
         </div>
