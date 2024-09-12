@@ -54,19 +54,19 @@ const Registration = () => {
       email,
       phoneNumber,
       registrationTime: date,
+      lastLoginTime: new Date(),
       imageUrl,
     };
-
-    logInWithEmail(email, password).then(() => {
-      updateUser(name, imageUrl).then(async () => {
-        const res = await axiosPublic.post("/user", userInfo);
-        if (res.data.insertedId) {
+    const res = await axiosPublic.put("/user", userInfo);
+    if (res.data.upsertedCount > 0 || res.data.modifiedCount > 0) {
+      logInWithEmail(email, password).then(() => {
+        updateUser(name, imageUrl).then(async () => {
           await logOut();
           toast.success("SignUp Successful Please Login!");
           navigation("/sign-in");
-        }
+        });
       });
-    });
+    }
   };
   return (
     <div className="font-[sans-serif] bg-slate-50 w-full flex items-center py-10 min-h-screen">
