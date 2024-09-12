@@ -3,9 +3,12 @@ import Google from "../../../components/socialMediaLogin/Google";
 import { toast } from "react-toastify";
 import useAuth from "../../../hooks/useAuth";
 import axios from "axios";
+import useAxiosPublic from "../../../hooks/useAxiosPublic";
 
 const Registration = () => {
-  const { logInWithEmail, updateUser } = useAuth();
+  const { logInWithEmail, updateUser, logOut } = useAuth();
+  const axiosPublic = useAxiosPublic();
+  const date = new Date();
   const navigation = useNavigate();
   const handleSignUp = async (e) => {
     e.preventDefault();
@@ -50,15 +53,18 @@ const Registration = () => {
       name,
       email,
       phoneNumber,
-      password,
-      confirmPassword,
-      image,
+      registrationTime: date,
+      imageUrl,
     };
 
     logInWithEmail(email, password).then(() => {
-      updateUser(name, imageUrl).then(() => {
-        toast.success("SignUp Successful!");
-        navigation("/")
+      updateUser(name, imageUrl).then(async () => {
+        const res = await axiosPublic.post("/user", userInfo);
+        if (res.data.insertedId) {
+          await logOut();
+          toast.success("SignUp Successful Please Login!");
+          navigation("/sign-in");
+        }
       });
     });
   };

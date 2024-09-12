@@ -17,8 +17,8 @@ const NavBar = () => {
   };
   const navLinks = [
     { href: "#home", label: "Home" },
+    { href: "#products", label: "Available Camps" },
     { href: "#about-us", label: "About Us" },
-    { href: "#products", label: "Products" },
     { href: "#contact-us", label: "Contact Us" },
   ];
 
@@ -30,7 +30,7 @@ const NavBar = () => {
             <img src={logo} className="w-16" alt="logo" />
             <p className="text-3xl font-bold">MediCare</p>
           </Link>
-          <ul className="flex-1 flex justify-center items-center gap-16 max-lg:hidden">
+          <ul className="flex-1 flex justify-center items-center gap-12 max-lg:hidden">
             {navLinks.map((item) => (
               <li key={item.label}>
                 <a
@@ -72,7 +72,7 @@ const NavBar = () => {
         <div>
           <nav className="fixed w-1/2 top-0 right-0 left-0 z-10 bottom-0 lg:bottom-auto bg-slate-100">
             <div
-              className="hidden max-lg:block fixed right-0  px-4 py-6 cursor-pointer"
+              className="hidden max-lg:block fixed right-0  px-4 py-8 cursor-pointer"
               onClick={() => {
                 setIsMenuOpen(!isMenuOpen);
               }}
