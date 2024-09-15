@@ -8,7 +8,6 @@ const useUser = () => {
     queryKey: ["users"],
     queryFn: async () => {
       const { data } = await axiosProtected.get("/users");
-      console.log("from use user" ,data)
       return data;
     },
   });

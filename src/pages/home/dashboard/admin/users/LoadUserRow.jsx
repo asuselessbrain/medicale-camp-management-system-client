@@ -1,4 +1,6 @@
 import PropTypes from "prop-types";
+import { LiaEditSolid } from "react-icons/lia";
+import { MdDeleteForever } from "react-icons/md";
 
 const LoadUserRow = ({ user, index }) => {
   const {
@@ -16,7 +18,7 @@ const LoadUserRow = ({ user, index }) => {
         <td className="px-6 py-4">{index + 1}</td>
         <td className="px-6 py-4">{name}</td>
         <td className="px-6 py-4">
-          <img src={imageUrl} alt="userImage" width={46} />
+          <img src={imageUrl} alt="userImage" className="rounded" width={46} />
         </td>
         <td className="px-6 py-4">{email}</td>
         <td className="px-6 py-4">{phoneNumber}</td>
@@ -26,14 +28,15 @@ const LoadUserRow = ({ user, index }) => {
         <td className="px-6 py-4">
           {new Date(lastLoginTime).toLocaleString()}
         </td>
-        <td className="px-6 py-4 text-right">
-          <a
-            href="#"
-            className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-          >
-            Edit
-          </a>
+        <td className="px-6 py-4 text-right flex items-center gap-2">
+          <button className="flex p-2.5 bg-yellow-500 rounded-xl hover:rounded-3xl hover:bg-yellow-600 transition-all duration-300 text-white">
+          <LiaEditSolid size={24} />
+          </button>
+          <button className="flex p-2.5 bg-red-500 rounded-xl hover:rounded-3xl hover:bg-red-600 transition-all duration-300 text-white">
+          <MdDeleteForever size={24} />
+          </button>
         </td>
+
       </tr>
     </tbody>
   );
