@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 const LoadUserRow = ({ user, index }) => {
   const {
     name,
@@ -7,6 +9,7 @@ const LoadUserRow = ({ user, index }) => {
     registrationTime,
     lastLoginTime,
   } = user;
+
   return (
     <tbody>
       <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
@@ -20,7 +23,9 @@ const LoadUserRow = ({ user, index }) => {
         <td className="px-6 py-4">
           {new Date(registrationTime).toLocaleString()}
         </td>
-        <td className="px-6 py-4">{new Date(lastLoginTime).toLocaleString()}</td>
+        <td className="px-6 py-4">
+          {new Date(lastLoginTime).toLocaleString()}
+        </td>
         <td className="px-6 py-4 text-right">
           <a
             href="#"
@@ -32,6 +37,11 @@ const LoadUserRow = ({ user, index }) => {
       </tr>
     </tbody>
   );
+};
+
+LoadUserRow.propTypes = {
+  user: PropTypes.object.isRequired,
+  index: PropTypes.number.isRequired,
 };
 
 export default LoadUserRow;

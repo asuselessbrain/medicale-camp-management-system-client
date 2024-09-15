@@ -3,7 +3,6 @@ import LoadUserRow from "./LoadUserRow";
 
 const LoadUser = () => {
   const [users] = useUser();
-  console.log(users);
   return (
     <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
       <table className="w-full text-left rtl:text-right text-gray-500 dark:text-gray-400">
