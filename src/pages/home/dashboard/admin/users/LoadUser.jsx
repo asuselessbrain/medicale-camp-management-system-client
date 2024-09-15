@@ -2,31 +2,43 @@ import useUser from "../../../../../hooks/useUser";
 import LoadUserRow from "./LoadUserRow";
 
 const LoadUser = () => {
-  const [user] = useUser();
-  console.log(user);
+  const [users] = useUser();
+  console.log(users);
   return (
     <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
       <table className="w-full text-left rtl:text-right text-gray-500 dark:text-gray-400">
         <thead className="text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
           <tr>
-            <th scope="col" className="px-6 py-3">
-              Product name
+          <th scope="col" className="px-6 py-3">
+              
             </th>
             <th scope="col" className="px-6 py-3">
-              Color
+              Name
             </th>
             <th scope="col" className="px-6 py-3">
-              Category
+              Image
             </th>
             <th scope="col" className="px-6 py-3">
-              Price
+              Email
             </th>
             <th scope="col" className="px-6 py-3">
-              <span className="sr-only">Edit</span>
+              Phone Number
+            </th>
+            <th scope="col" className="px-6 py-3">
+              Account Creation Time
+            </th>
+            <th scope="col" className="px-6 py-3">
+              Last Login
+            </th>
+            <th scope="col" className="px-6 py-3">
+              Action
             </th>
           </tr>
         </thead>
-        <LoadUserRow />
+
+        {users.map((user, index) => (
+          <LoadUserRow key={user._id} user={user} index={index} />
+        ))}
       </table>
     </div>
   );
