@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Google from "../../../components/socialMediaLogin/Google";
 import useAuth from "../../../hooks/useAuth";
 import { toast } from "react-toastify";
@@ -6,7 +6,8 @@ import useAxiosPublic from "../../../hooks/useAxiosPublic";
 
 const Login = () => {
   const { signInWithEmail } = useAuth();
-  const axiosPublic = useAxiosPublic()
+  const axiosPublic = useAxiosPublic();
+  const navigate = useNavigate();
 
   const handleSignIn = async (e) => {
     e.preventDefault();
@@ -16,14 +17,15 @@ const Login = () => {
 
     const userInfo = {
       email,
-      lastLoginTime: new Date()
-    }
+      lastLoginTime: new Date(),
+    };
 
     const res = await axiosPublic.put("/user", userInfo);
     if (res.data.upsertedCount > 0 || res.data.modifiedCount > 0) {
       const res = await signInWithEmail(email, password);
       if (res.user) {
         toast.success("Login Successfully!");
+        navigate("/");
       }
     }
   };

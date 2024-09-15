@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const axiosProtected = axios.create({
-  baseURL: <import className="meta env"></import>.VITE_Base_URL,
+  baseURL: import.meta.env.VITE_Base_URL,
 });
 
 const useAxiosProtected = () => {
