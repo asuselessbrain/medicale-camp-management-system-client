@@ -1,4 +1,4 @@
-import LoadUser from "./dashboard/admin/LoadUser";
+import LoadUser from "./dashboard/admin/users/LoadUser";
 import Slider from "./slider/Slider";
 
 const Home = () => {
