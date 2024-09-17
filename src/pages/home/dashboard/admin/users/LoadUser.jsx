@@ -24,6 +24,9 @@ const LoadUser = () => {
               Phone Number
             </th>
             <th scope="col" className="px-6 py-4">
+              Role
+            </th>
+            <th scope="col" className="px-6 py-4">
               Account Creation Time
             </th>
             <th scope="col" className="px-6 py-4">
