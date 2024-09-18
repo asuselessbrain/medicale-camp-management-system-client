@@ -56,6 +56,7 @@ const Registration = () => {
       registrationTime: date,
       lastLoginTime: new Date(),
       imageUrl,
+      role: 'user'
     };
     const res = await axiosPublic.put("/user", userInfo);
     if (res.data.upsertedCount > 0 || res.data.modifiedCount > 0) {

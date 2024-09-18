@@ -6,9 +6,11 @@ import UpdateUserModal from "./UpdateUserModal";
 import useAxiosProtected from "../../../../../hooks/useAxiosProtected";
 import { toast } from "react-toastify";
 import useUser from "../../../../../hooks/useUser";
+import Swal from "sweetalert2";
 
 const LoadUserRow = ({ user, index }) => {
   const {
+    _id,
     name,
     imageUrl,
     email,
@@ -36,6 +38,31 @@ const LoadUserRow = ({ user, index }) => {
       toast.success("User role updated successfully!");
     }
     handleToggle();
+  };
+
+  const handleDelete = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        const res = await axiosProtected.delete(`/delete-user/${id}`);
+
+        if (res.data.deletedCount) {
+          refetch();
+          Swal.fire({
+            title: "Deleted!",
+            text: "Your file has been deleted.",
+            icon: "success",
+          });
+        }
+      }
+    });
   };
 
   return (
@@ -74,7 +101,10 @@ const LoadUserRow = ({ user, index }) => {
             />
           )}
 
-          <button className="flex p-2.5 bg-red-500 rounded-xl hover:rounded-3xl hover:bg-red-600 transition-all duration-300 text-white">
+          <button
+            onClick={() => handleDelete(_id)}
+            className="flex p-2.5 bg-red-500 rounded-xl hover:rounded-3xl hover:bg-red-600 transition-all duration-300 text-white"
+          >
             <MdDeleteForever size={24} />
           </button>
         </td>
