@@ -1,47 +1,72 @@
+import axios from "axios";
 import { useState } from "react";
 import { FileUploader } from "react-drag-drop-files";
 
 const fileTypes = ["JPG", "PNG", "GIF"];
 
 const AddCamp = () => {
-  // <h2 classNameName="text-7xl mx-auto font-semibold text-center font-dancing-script my-2 text-blue-500">
-  //       Add a Camp
-  //     </h2>
+  const [file, setFile] = useState(null);
 
-  // const [file, setFile] = useState(null);
-  const handleChange = (e) => {
+  const imageBbUrl = `https://api.imgbb.com/1/upload?key=${
+    import.meta.env.VITE_imagebb_api
+  }`;
+  const handleChange = async (e) => {
     e.preventDefault();
-    const file = e.target.file.files[0];
-    console.log(file);
+    const image = e.target.image.files[0];
+    const res = await axios.post(
+      imageBbUrl,
+      { image },
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    );
+    console.log(res.data.data.display_url);
+  };
+
+  const handleChange2 = (file) => {
+    setFile(file);
   };
 
   return (
-    <div className="container mx-auto p-4">
+    <div className="container bg-gray-50 mx-auto p-4 rounded-xl">
       {/* <!-- Page Title --> */}
-      <h1 className="text-3xl font-bold text-[black] mb-6">Create Event</h1>
+      <h2 className="text-7xl mx-auto font-semibold text-center font-dancing-script mt-2 text-blue-500">
+        Add a Camp
+      </h2>
 
-      <form onSubmit={handleChange} className="grid grid-cols-1 gap-6">
+      <form onSubmit={handleChange} className="grid grid-cols-1 gap-6 mt-10 p-3">
         {/* <!-- Title --> */}
-        <div className="p-2 grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="p-2">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
             <input
               type="text"
               id="title"
               name="title"
               placeholder="Event Title"
-              className="block w-full rounded-md border-gray-300 shadow-sm focus:border-[#8c0327] focus:ring-[#8c0327] focus:ring-opacity-50 p-2 bg-[#f6f6f6]"
+              className="block w-full rounded-md border-gray-300 shadow-sm focus:border-[#8c0327] focus:ring-[#8c0327] focus:ring-opacity-50 p-3 bg-white"
             />
           </div>
           {/* <!-- Image Upload --> */}
-          <FileUploader name="file" types={fileTypes} />
+          <div>
+            <FileUploader
+              handleChange={handleChange2}
+              name="image"
+              types={fileTypes}
+            />
+            <p className="ml-2 mt-3">
+              {file ? `File name: ${file.name}` : "no files uploaded yet"}
+            </p>
+          </div>
         </div>
 
         {/* <!-- Category --> */}
-        <div className="p-2">
+        <div>
           <select
             id="category"
             name="category"
-            className="block w-full rounded-md border-gray-300 shadow-sm focus:border-[#8c0327] focus:ring-[#8c0327] focus:ring-opacity-50 p-2 bg-[#f6f6f6]"
+            className="block w-full rounded-md border-gray-300 shadow-sm focus:border-[#8c0327] focus:ring-[#8c0327] focus:ring-opacity-50 p-3 bg-white"
           >
             <option value="">Select a category</option>
             <option>Music</option>
@@ -51,8 +76,6 @@ const AddCamp = () => {
           </select>
         </div>
 
-        {/* <!-- Description and Image Upload --> */}
-
         {/* <!-- Description --> */}
         <div>
           <textarea
@@ -60,23 +83,23 @@ const AddCamp = () => {
             name="description"
             rows="3"
             placeholder="Event Description"
-            className="block w-full h-48 rounded-md border-gray-300 shadow-sm focus:border-[#8c0327] focus:ring-[#8c0327] focus:ring-opacity-50 p-2 bg-[#f6f6f6]"
+            className="block w-full h-48 rounded-md border-gray-300 shadow-sm focus:border-[#8c0327] focus:ring-[#8c0327] focus:ring-opacity-50 p-3 bg-white"
           ></textarea>
         </div>
 
         {/* <!-- Location --> */}
-        <div className="p-2">
+        <div>
           <input
             type="text"
             id="location"
             name="location"
             placeholder="Location"
-            className="block w-full rounded-md border-gray-300 shadow-sm focus:border-[#8c0327] focus:ring-[#8c0327] focus:ring-opacity-50 p-2 bg-[#f6f6f6]"
+            className="block w-full rounded-md border-gray-300 shadow-sm focus:border-[#8c0327] focus:ring-[#8c0327] focus:ring-opacity-50 p-3 bg-white"
           />
         </div>
 
         {/* <!-- Organizer Name and Email --> */}
-        <div className="p-2 grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* <!-- Organizer Name --> */}
           <div>
             <input
@@ -84,7 +107,7 @@ const AddCamp = () => {
               id="organizer-name"
               name="organizer-name"
               placeholder="Organizer Name"
-              className="block w-full rounded-md border-gray-300 shadow-sm focus:border-[#8c0327] focus:ring-[#8c0327] focus:ring-opacity-50 p-2 bg-[#f6f6f6]"
+              className="block w-full rounded-md border-gray-300 shadow-sm focus:border-[#8c0327] focus:ring-[#8c0327] focus:ring-opacity-50 p-3 bg-white"
             />
           </div>
 
@@ -95,26 +118,26 @@ const AddCamp = () => {
               id="organizer-email"
               name="organizer-email"
               placeholder="Organizer Email"
-              className="block w-full rounded-md border-gray-300 shadow-sm focus:border-[#8c0327] focus:ring-[#8c0327] focus:ring-opacity-50 p-2 bg-[#f6f6f6]"
+              className="block w-full rounded-md border-gray-300 shadow-sm focus:border-[#8c0327] focus:ring-[#8c0327] focus:ring-opacity-50 p-3 bg-white"
             />
           </div>
         </div>
 
         {/* <!-- Organizer Address --> */}
-        <div className="p-2">
+        <div>
           <input
             type="text"
             id="organizer-address"
             name="organizer-address"
             placeholder="Organizer Address"
-            className="block w-full rounded-md border-gray-300 shadow-sm focus:border-[#8c0327] focus:ring-[#8c0327] focus:ring-opacity-50 p-2 bg-[#f6f6f6]"
+            className="block w-full rounded-md border-gray-300 shadow-sm focus:border-[#8c0327] focus:ring-[#8c0327] focus:ring-opacity-50 p-3 bg-white"
           />
         </div>
 
         {/* <!-- Start Date and End Date --> */}
-        <div className="p-2 grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* <!-- Start Date --> */}
-          <div className="flex items-center bg-[#f6f6f6] rounded-md p-2">
+          <div className="flex items-center bg-white rounded-md p-3">
             <span className="flex-shrink-0 flex items-center mr-3 text-gray-500">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -136,12 +159,12 @@ const AddCamp = () => {
               type="datetime-local"
               id="start-date"
               name="start-date"
-              className="block w-full rounded-md border-gray-300 shadow-sm focus:border-[#8c0327] focus:ring-[#8c0327] focus:ring-opacity-50 p-2 bg-[#f6f6f6]"
+              className="block w-full rounded-md border-gray-300 shadow-sm focus:border-[#8c0327] focus:ring-[#8c0327] focus:ring-opacity-50 p-3 bg-white"
             />
           </div>
 
           {/* <!-- End Date --> */}
-          <div className="flex items-center bg-[#f6f6f6] rounded-md p-2">
+          <div className="flex items-center bg-white rounded-md">
             <span className="flex-shrink-0 flex items-center mr-3 text-gray-500">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -163,19 +186,19 @@ const AddCamp = () => {
               type="datetime-local"
               id="end-date"
               name="end-date"
-              className="block w-full rounded-md border-gray-300 shadow-sm focus:border-[#8c0327] focus:ring-[#8c0327] focus:ring-opacity-50 p-2 bg-[#f6f6f6]"
+              className="block w-full rounded-md border-gray-300 shadow-sm focus:border-[#8c0327] focus:ring-[#8c0327] focus:ring-opacity-50 p-3 bg-white"
             />
           </div>
         </div>
 
         {/* <!-- Status and Tags --> */}
-        <div className="p-2 grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* <!-- Status --> */}
-          <div className="flex items-center bg-[#f6f6f6] rounded-md">
+          <div className="flex items-center bg-white rounded-md">
             <select
               id="status"
               name="status"
-              className="block w-full h-12 rounded-md border-gray-300 shadow-sm focus:border-[#8c0327] focus:ring-[#8c0327] focus:ring-opacity-50 bg-[#f6f6f6] padding: 0;"
+              className="block w-full h-12 rounded-md border-gray-300 shadow-sm focus:border-[#8c0327] focus:ring-[#8c0327] focus:ring-opacity-50 bg-white padding: 0;"
             >
               <option value="">Select Status</option>
               <option value="active">Active</option>
@@ -190,13 +213,13 @@ const AddCamp = () => {
               id="tags"
               name="tags"
               placeholder="Tags (comma-separated)"
-              className="block w-full rounded-md border-gray-300 shadow-sm focus:border-[#8c0327] focus:ring-[#8c0327] focus:ring-opacity-50 h-12 bg-[#f6f6f6]"
+              className="block w-full rounded-md border-gray-300 shadow-sm focus:border-[#8c0327] focus:ring-[#8c0327] focus:ring-opacity-50 h-12 bg-white"
             />
           </div>
         </div>
 
         {/* <!-- Registration Button --> */}
-        <div className="col-span-full mt-6 p-2">
+        <div className="col-span-full mt-6">
           <button
             type="submit"
             className="block w-full bg-[#8c0327] hover:bg-[#6b0220] text-white font-bold py-3 px-4 rounded-full"
