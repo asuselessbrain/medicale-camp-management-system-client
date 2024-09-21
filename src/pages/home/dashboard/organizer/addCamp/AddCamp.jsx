@@ -222,7 +222,7 @@ const AddCamp = () => {
         <div className="col-span-full mt-6">
           <button
             type="submit"
-            className="block w-full bg-[#8c0327] hover:bg-[#6b0220] text-white font-bold py-3 px-4 rounded-full"
+            className="block w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-4 rounded-full"
           >
             Register for Event
           </button>
