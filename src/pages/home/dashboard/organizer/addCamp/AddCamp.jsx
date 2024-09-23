@@ -224,7 +224,7 @@ const AddCamp = () => {
             type="submit"
             className="block w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-4 rounded-full"
           >
-            Register for Event
+            <i>Add Camp</i>
           </button>
         </div>
       </form>
