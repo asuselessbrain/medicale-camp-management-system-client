@@ -1,7 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
 import { FileUploader } from "react-drag-drop-files";
-
 const fileTypes = ["JPG", "PNG", "GIF"];
 
 const AddCamp = () => {
@@ -36,10 +35,14 @@ const AddCamp = () => {
         Add a Camp
       </h2>
 
-      <form onSubmit={handleChange} className="grid grid-cols-1 gap-6 mt-10 p-3">
+      <form
+        onSubmit={handleChange}
+        className="grid grid-cols-1 gap-6 mt-10 p-3"
+      >
         {/* <!-- Title --> */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div>
+          <div className="space-y-2">
+            <label className="p-3 text-xl font-inter">Camp Name:</label>
             <input
               type="text"
               id="title"
@@ -49,7 +52,8 @@ const AddCamp = () => {
             />
           </div>
           {/* <!-- Image Upload --> */}
-          <div>
+          <div className="space-y-2">
+            <label className="p-3 text-xl font-inter">Image:</label>
             <FileUploader
               handleChange={handleChange2}
               name="image"
@@ -62,18 +66,42 @@ const AddCamp = () => {
         </div>
 
         {/* <!-- Category --> */}
-        <div>
-          <select
-            id="category"
-            name="category"
-            className="block w-full rounded-md border-gray-300 shadow-sm focus:border-[#8c0327] focus:ring-[#8c0327] focus:ring-opacity-50 p-3 bg-white"
-          >
-            <option value="">Select a category</option>
-            <option>Music</option>
-            <option>Sports</option>
-            <option>Arts</option>
-            <option>Technology</option>
-          </select>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch h-full">
+          <div className="space-y-2 h-full">
+            <label className="p-3 text-xl font-inter">Camp Fee:</label>
+            <input
+              type="number"
+              id="title"
+              name="title"
+              placeholder="Camp Fee"
+              className="block w-full rounded-md border-gray-300 shadow-sm focus:border-[#8c0327] focus:ring-[#8c0327] focus:ring-opacity-50 p-3 bg-white"
+            />
+          </div>
+          <div className="space-y-2 h-full">
+            <label className="p-3 text-xl font-inter">Camp Time:</label>
+            <input
+              type="datetime-local"
+              name="date_time"
+              id="date_time"
+              className="block w-full rounded-md border-gray-300 shadow-sm focus:border-[#8c0327] focus:ring-[#8c0327] focus:ring-opacity-50 p-3 bg-white"
+            />
+          </div>
+        </div>
+
+        {/* select country state and city */}
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch h-full">
+          <div className="space-y-2 h-full">
+            <label className="p-3 text-xl font-inter">Camp Location:</label>
+            <select
+              id="status"
+              name="status"
+              className="block w-full h-12 rounded-md p-3 border-gray-300 shadow-sm focus:border-[#8c0327] focus:ring-[#8c0327] focus:ring-opacity-50 bg-white padding: 0;"
+            >
+              <option value="">Select Status</option>
+              
+            </select>
+          </div>
         </div>
 
         {/* <!-- Description --> */}

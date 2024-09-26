@@ -7,8 +7,15 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        'dancing-script': ["Dancing Script", "cursive"]
-      }
+        'dancing-script': ["Dancing Script", "cursive"],
+        inter: ['Inter', 'sans-serif'],
+      },
+      fontWeight: {
+        400: '400',
+        500: '500',
+        600: '600',
+        700: '700',
+      },
     },
   },
   plugins: [
