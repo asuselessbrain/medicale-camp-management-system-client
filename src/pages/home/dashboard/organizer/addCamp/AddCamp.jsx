@@ -2,11 +2,14 @@ import axios from "axios";
 import { useState } from "react";
 import { FileUploader } from "react-drag-drop-files";
 import useAuth from "../../../../../hooks/useAuth";
+import useAxiosProtected from "../../../../../hooks/useAxiosProtected";
+import { toast } from "react-toastify";
 const fileTypes = ["JPG", "PNG", "GIF"];
 
 const AddCamp = () => {
   const [file, setFile] = useState(null);
   const {user} = useAuth()
+  const axiosProtected = useAxiosProtected()
 
   const imageBbUrl = `https://api.imgbb.com/1/upload?key=${
     import.meta.env.VITE_imagebb_api
@@ -46,7 +49,13 @@ const AddCamp = () => {
       organizerEmail,
       organizerName
     }
-    console.log(campInfo);
+
+    const postCampRes = await axiosProtected.post("/add-camp", campInfo)
+
+    if(postCampRes.data.insertedId){
+      toast.success("Camp Added Successfully!")
+    }
+    
   };
 
   const handleChange2 = (file) => {
