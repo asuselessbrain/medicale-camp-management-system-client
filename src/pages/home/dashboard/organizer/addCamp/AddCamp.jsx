@@ -1,10 +1,12 @@
 import axios from "axios";
 import { useState } from "react";
 import { FileUploader } from "react-drag-drop-files";
+import useAuth from "../../../../../hooks/useAuth";
 const fileTypes = ["JPG", "PNG", "GIF"];
 
 const AddCamp = () => {
   const [file, setFile] = useState(null);
+  const {user} = useAuth()
 
   const imageBbUrl = `https://api.imgbb.com/1/upload?key=${
     import.meta.env.VITE_imagebb_api
@@ -12,6 +14,16 @@ const AddCamp = () => {
   const handleChange = async (e) => {
     e.preventDefault();
     const image = e.target.image.files[0];
+    const form = e.target;
+    const campName = form.name.value;
+    const campFee = form.campFee.value;
+    const campTime = form.campTime.value;
+    const campLocation = form.campLocation.value;
+    const healthcareProfessionalName = form.healthcareProfessionalName.value;
+    const description = form.description.value;
+    const organizerName = form.organizerName.value;
+    const organizerEmail = form.organizerEmail.value;
+
     const res = await axios.post(
       imageBbUrl,
       { image },
@@ -21,7 +33,20 @@ const AddCamp = () => {
         },
       }
     );
-    console.log(res.data.data.display_url);
+    const imageLink = res.data.data.display_url;
+
+    const campInfo = {
+      campName,
+      imageLink,
+      campFee,
+      campTime,
+      campLocation,
+      healthcareProfessionalName,
+      description,
+      organizerEmail,
+      organizerName
+    }
+    console.log(campInfo);
   };
 
   const handleChange2 = (file) => {
@@ -39,15 +64,16 @@ const AddCamp = () => {
         onSubmit={handleChange}
         className="grid grid-cols-1 gap-6 mt-10 p-3"
       >
-        {/* <!-- Title --> */}
+        {/* <!-- camp name and image --> */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {/* camp name */}
           <div className="space-y-2">
             <label className="p-3 text-xl font-inter">Camp Name:</label>
             <input
               type="text"
-              id="title"
-              name="title"
-              placeholder="Event Title"
+              id="name"
+              name="name"
+              placeholder="Camp Name"
               className="block w-full rounded-md border-gray-300 shadow-sm focus:border-[#8c0327] focus:ring-[#8c0327] focus:ring-opacity-50 p-3 bg-white"
             />
           </div>
@@ -67,22 +93,24 @@ const AddCamp = () => {
 
         {/* <!-- Category --> */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch h-full">
+          {/* camp fee */}
           <div className="space-y-2 h-full">
             <label className="p-3 text-xl font-inter">Camp Fee:</label>
             <input
               type="number"
-              id="title"
-              name="title"
+              id="campFee"
+              name="campFee"
               placeholder="Camp Fee"
               className="block w-full rounded-md border-gray-300 shadow-sm focus:border-[#8c0327] focus:ring-[#8c0327] focus:ring-opacity-50 p-3 bg-white"
             />
           </div>
+          {/* date and time */}
           <div className="space-y-2 h-full">
             <label className="p-3 text-xl font-inter">Camp Time:</label>
             <input
               type="datetime-local"
-              name="date_time"
-              id="date_time"
+              name="campTime"
+              id="campTime"
               className="block w-full rounded-md border-gray-300 shadow-sm focus:border-[#8c0327] focus:ring-[#8c0327] focus:ring-opacity-50 p-3 bg-white"
             />
           </div>
@@ -100,13 +128,14 @@ const AddCamp = () => {
               className="block w-full rounded-md border-gray-300 shadow-sm focus:border-[#8c0327] focus:ring-[#8c0327] focus:ring-opacity-50 p-3 bg-white"
             />
           </div>
+          {/* healthcare professional name */}
           <div className="space-y-2 h-full">
             <label className="p-3 text-xl font-inter">
               Healthcare Professional Name
             </label>
             <select
-              id="status"
-              name="status"
+              id="healthcareProfessionalName"
+              name="healthcareProfessionalName"
               className="block w-full h-12 p-3 rounded-md border-gray-300 shadow-sm focus:border-[#8c0327] focus:ring-[#8c0327] focus:ring-opacity-50 bg-white padding: 0;"
             >
               <option value="">Select Status</option>
@@ -134,8 +163,10 @@ const AddCamp = () => {
           <div>
             <input
               type="text"
-              id="organizer-name"
-              name="organizer-name"
+              id="organizerName"
+              name="organizerName"
+              defaultValue={user?.displayName}
+              readOnly
               placeholder="Organizer Name"
               className="block w-full rounded-md border-gray-300 shadow-sm focus:border-[#8c0327] focus:ring-[#8c0327] focus:ring-opacity-50 p-3 bg-white"
             />
@@ -145,8 +176,10 @@ const AddCamp = () => {
           <div>
             <input
               type="email"
-              id="organizer-email"
-              name="organizer-email"
+              id="organizerEmail"
+              name="organizerEmail"
+              readOnly
+              defaultValue={user?.email}
               placeholder="Organizer Email"
               className="block w-full rounded-md border-gray-300 shadow-sm focus:border-[#8c0327] focus:ring-[#8c0327] focus:ring-opacity-50 p-3 bg-white"
             />
