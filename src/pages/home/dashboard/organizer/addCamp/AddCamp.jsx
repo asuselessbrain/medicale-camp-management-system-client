@@ -88,24 +88,37 @@ const AddCamp = () => {
           </div>
         </div>
 
-        {/* select country state and city */}
-
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch h-full">
+          {/* <!-- Location --> */}
           <div className="space-y-2 h-full">
-            <label className="p-3 text-xl font-inter">Camp Location:</label>
+            <label className="p-3 text-xl font-inter">Venue Location</label>
+            <input
+              type="text"
+              id="campLocation"
+              name="campLocation"
+              placeholder="Venue Location"
+              className="block w-full rounded-md border-gray-300 shadow-sm focus:border-[#8c0327] focus:ring-[#8c0327] focus:ring-opacity-50 p-3 bg-white"
+            />
+          </div>
+          <div className="space-y-2 h-full">
+            <label className="p-3 text-xl font-inter">
+              Healthcare Professional Name
+            </label>
             <select
               id="status"
               name="status"
-              className="block w-full h-12 rounded-md p-3 border-gray-300 shadow-sm focus:border-[#8c0327] focus:ring-[#8c0327] focus:ring-opacity-50 bg-white padding: 0;"
+              className="block w-full h-12 p-3 rounded-md border-gray-300 shadow-sm focus:border-[#8c0327] focus:ring-[#8c0327] focus:ring-opacity-50 bg-white padding: 0;"
             >
               <option value="">Select Status</option>
-              
+              <option value="active">Active</option>
+              <option value="inactive">Inactive</option>
             </select>
           </div>
         </div>
 
         {/* <!-- Description --> */}
-        <div>
+        <div className="space-y-2">
+          <label className="p-3 text-xl font-inter">Description</label>
           <textarea
             id="description"
             name="description"
@@ -113,17 +126,6 @@ const AddCamp = () => {
             placeholder="Event Description"
             className="block w-full h-48 rounded-md border-gray-300 shadow-sm focus:border-[#8c0327] focus:ring-[#8c0327] focus:ring-opacity-50 p-3 bg-white"
           ></textarea>
-        </div>
-
-        {/* <!-- Location --> */}
-        <div>
-          <input
-            type="text"
-            id="location"
-            name="location"
-            placeholder="Location"
-            className="block w-full rounded-md border-gray-300 shadow-sm focus:border-[#8c0327] focus:ring-[#8c0327] focus:ring-opacity-50 p-3 bg-white"
-          />
         </div>
 
         {/* <!-- Organizer Name and Email --> */}
@@ -147,101 +149,6 @@ const AddCamp = () => {
               name="organizer-email"
               placeholder="Organizer Email"
               className="block w-full rounded-md border-gray-300 shadow-sm focus:border-[#8c0327] focus:ring-[#8c0327] focus:ring-opacity-50 p-3 bg-white"
-            />
-          </div>
-        </div>
-
-        {/* <!-- Organizer Address --> */}
-        <div>
-          <input
-            type="text"
-            id="organizer-address"
-            name="organizer-address"
-            placeholder="Organizer Address"
-            className="block w-full rounded-md border-gray-300 shadow-sm focus:border-[#8c0327] focus:ring-[#8c0327] focus:ring-opacity-50 p-3 bg-white"
-          />
-        </div>
-
-        {/* <!-- Start Date and End Date --> */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {/* <!-- Start Date --> */}
-          <div className="flex items-center bg-white rounded-md p-3">
-            <span className="flex-shrink-0 flex items-center mr-3 text-gray-500">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="w-5 h-5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M5 3v2M19 3v2M5 10h14M4 21h16a1 1 0 001-1V8a1 1 0 00-1-1H4a1 1 0 00-1 1v12a1 1 0 001 1z"
-                ></path>
-              </svg>
-              <span className="ml-2">Start Date</span>
-            </span>
-            <input
-              type="datetime-local"
-              id="start-date"
-              name="start-date"
-              className="block w-full rounded-md border-gray-300 shadow-sm focus:border-[#8c0327] focus:ring-[#8c0327] focus:ring-opacity-50 p-3 bg-white"
-            />
-          </div>
-
-          {/* <!-- End Date --> */}
-          <div className="flex items-center bg-white rounded-md">
-            <span className="flex-shrink-0 flex items-center mr-3 text-gray-500">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="w-5 h-5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M5 3v2M19 3v2M5 10h14M4 21h16a1 1 0 001-1V8a1 1 0 00-1-1H4a1 1 0 00-1 1v12a1 1 0 001 1z"
-                ></path>
-              </svg>
-              <span className="ml-2">End Date</span>
-            </span>
-            <input
-              type="datetime-local"
-              id="end-date"
-              name="end-date"
-              className="block w-full rounded-md border-gray-300 shadow-sm focus:border-[#8c0327] focus:ring-[#8c0327] focus:ring-opacity-50 p-3 bg-white"
-            />
-          </div>
-        </div>
-
-        {/* <!-- Status and Tags --> */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {/* <!-- Status --> */}
-          <div className="flex items-center bg-white rounded-md">
-            <select
-              id="status"
-              name="status"
-              className="block w-full h-12 rounded-md border-gray-300 shadow-sm focus:border-[#8c0327] focus:ring-[#8c0327] focus:ring-opacity-50 bg-white padding: 0;"
-            >
-              <option value="">Select Status</option>
-              <option value="active">Active</option>
-              <option value="inactive">Inactive</option>
-            </select>
-          </div>
-
-          {/* <!-- Tags --> */}
-          <div>
-            <input
-              type="text"
-              id="tags"
-              name="tags"
-              placeholder="Tags (comma-separated)"
-              className="block w-full rounded-md border-gray-300 shadow-sm focus:border-[#8c0327] focus:ring-[#8c0327] focus:ring-opacity-50 h-12 bg-white"
             />
           </div>
         </div>
