@@ -1,99 +1,45 @@
-const MyAddedCampTableBody = () => {
+import { FaRegEdit } from "react-icons/fa";
+import { MdDeleteForever } from "react-icons/md";
+
+const MyAddedCampTableBody = ({ camp, index }) => {
+  const {
+    campName,
+    imageLink,
+    campFee,
+    campTime,
+    campLocation,
+    healthcareProfessionalName,
+    description,
+    organizerEmail,
+    organizerName,
+  } = camp;
   return (
     <tbody>
       <tr className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
+        <td className="px-6 py-4">{index + 1}</td>
         <th
           scope="row"
           className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
         >
-          Apple MacBook Pro 17
+          {campName}
         </th>
-        <td className="px-6 py-4">Silver</td>
-        <td className="px-6 py-4">Laptop</td>
-        <td className="px-6 py-4">$2999</td>
+
+        <td className="px-6 py-4"><img src={imageLink} className="w-12" alt="" /></td>
+        <td className="px-6 py-4">{campFee} Tk</td>
+        <td className="px-6 py-4">{campTime}</td>
+        <td className="px-6 py-4">{campLocation}</td>
+        <td className="px-6 py-4">{healthcareProfessionalName}</td>
+        <td className="px-6 py-4">{organizerName}</td>
+        <td className="px-6 py-4">{organizerEmail}</td>
         <td className="px-6 py-4">
-          <a
-            href="#"
-            className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-          >
-            Edit
-          </a>
-        </td>
-      </tr>
-      <tr className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
-        <th
-          scope="row"
-          className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-        >
-          Microsoft Surface Pro
-        </th>
-        <td className="px-6 py-4">White</td>
-        <td className="px-6 py-4">Laptop PC</td>
-        <td className="px-6 py-4">$1999</td>
-        <td className="px-6 py-4">
-          <a
-            href="#"
-            className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-          >
-            Edit
-          </a>
-        </td>
-      </tr>
-      <tr className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
-        <th
-          scope="row"
-          className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-        >
-          Magic Mouse 2
-        </th>
-        <td className="px-6 py-4">Black</td>
-        <td className="px-6 py-4">Accessories</td>
-        <td className="px-6 py-4">$99</td>
-        <td className="px-6 py-4">
-          <a
-            href="#"
-            className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-          >
-            Edit
-          </a>
-        </td>
-      </tr>
-      <tr className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
-        <th
-          scope="row"
-          className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-        >
-          Google Pixel Phone
-        </th>
-        <td className="px-6 py-4">Gray</td>
-        <td className="px-6 py-4">Phone</td>
-        <td className="px-6 py-4">$799</td>
-        <td className="px-6 py-4">
-          <a
-            href="#"
-            className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-          >
-            Edit
-          </a>
-        </td>
-      </tr>
-      <tr>
-        <th
-          scope="row"
-          className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-        >
-          Apple Watch 5
-        </th>
-        <td className="px-6 py-4">Red</td>
-        <td className="px-6 py-4">Wearables</td>
-        <td className="px-6 py-4">$999</td>
-        <td className="px-6 py-4">
-          <a
-            href="#"
-            className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-          >
-            Edit
-          </a>
+        <div className="flex items-center gap-2">
+        <button className="flex p-2.5 bg-yellow-500 rounded-xl hover:rounded-3xl hover:bg-yellow-600 transition-all duration-300 text-white">
+        <FaRegEdit size={20} />
+        </button>
+        <button className="flex p-2.5 bg-red-500 rounded-xl hover:rounded-3xl hover:bg-red-600 transition-all duration-300 text-white">
+        <MdDeleteForever size={20} />
+        </button>
+        </div>
         </td>
       </tr>
     </tbody>
