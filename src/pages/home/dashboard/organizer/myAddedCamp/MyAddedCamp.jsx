@@ -14,6 +14,8 @@ const MyAddedCamp = () => {
       return data;
     },
   });
+
+
   return (
     <div className="container bg-gray-100 mx-auto p-4 rounded-xl">
       <h2 className="text-7xl mx-auto font-semibold text-center font-dancing-script mt-2 mb-10 text-blue-500">
@@ -54,7 +56,11 @@ const MyAddedCamp = () => {
             </tr>
           </thead>
           {myAddedCamp.map((camp, index) => (
-            <MyAddedCampTableBody key={camp._id} camp={camp} index={index} />
+            <MyAddedCampTableBody
+              key={camp._id}
+              camp={camp}
+              index={index}
+            />
           ))}
         </table>
       </div>
