@@ -2,12 +2,13 @@ import { useQuery } from "@tanstack/react-query";
 import MyAddedCampTableBody from "./MyAddedCampTableBody";
 import useAxiosProtected from "../../../../../hooks/useAxiosProtected";
 import useAuth from "../../../../../hooks/useAuth";
+import Swal from "sweetalert2";
 
 const MyAddedCamp = () => {
   const axiosProtected = useAxiosProtected();
   const { user } = useAuth();
 
-  const { data: myAddedCamp = [] } = useQuery({
+  const { data: myAddedCamp = [], refetch } = useQuery({
     queryKey: ["myAddedCamp", user?.email],
     queryFn: async () => {
       const { data } = await axiosProtected(`/my-added-camp/${user?.email}`);
@@ -15,6 +16,29 @@ const MyAddedCamp = () => {
     },
   });
 
+  const handleDelete = async (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        const res = await axiosProtected.delete(`/delete-my-camp/${id}`);
+        if (res.data.deletedCount > 0) {
+          refetch()
+          Swal.fire({
+            title: "Deleted!",
+            text: "Your file has been deleted.",
+            icon: "success",
+          });
+        }
+      }
+    });
+  };
 
   return (
     <div className="container bg-gray-100 mx-auto p-4 rounded-xl">
@@ -36,7 +60,10 @@ const MyAddedCamp = () => {
                 Camp Fees
               </th>
               <th scope="col" className="px-6 py-3">
-                Date & Time
+                Date
+              </th>
+              <th scope="col" className="px-6 py-3">
+                Time
               </th>
               <th scope="col" className="px-6 py-3">
                 Location
@@ -60,6 +87,7 @@ const MyAddedCamp = () => {
               key={camp._id}
               camp={camp}
               index={index}
+              handleDelete={handleDelete}
             />
           ))}
         </table>

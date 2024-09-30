@@ -1,9 +1,15 @@
 import { FaRegEdit } from "react-icons/fa";
 import { MdDeleteForever } from "react-icons/md";
-import DeleteModal from "./DeleteModal";
-import Swal from "sweetalert2";
+import UpdateModal from "./UpdateModal";
+import { useState } from "react";
 
-const MyAddedCampTableBody = ({ camp, index }) => {
+const MyAddedCampTableBody = ({
+  camp,
+  index,
+  handleDelete,
+  handleUpdate,
+  updateCamp,
+}) => {
   const {
     _id,
     campName,
@@ -12,31 +18,14 @@ const MyAddedCampTableBody = ({ camp, index }) => {
     campTime,
     campLocation,
     healthcareProfessionalName,
-    description,
     organizerEmail,
     organizerName,
   } = camp;
 
-  const handleDelete = (id) => {
-    Swal.fire({
-      title: "Are you sure?",
-      text: "You won't be able to revert this!",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        console.log(id)
-        Swal.fire({
-          title: "Deleted!",
-          text: "Your file has been deleted.",
-          icon: "success",
-        });
-      }
-    });
-  };
+  const [showModal, setShowModal] = useState(false);
+
+  const timeArray = campTime.split("T");
+  console.log(timeArray);
 
   return (
     <tbody>
@@ -53,18 +42,30 @@ const MyAddedCampTableBody = ({ camp, index }) => {
           <img src={imageLink} className="w-12" alt="" />
         </td>
         <td className="px-6 py-4">{campFee} Tk</td>
-        <td className="px-6 py-4">{campTime}</td>
+        <td className="px-6 py-4">
+          {timeArray[0]} 
+        </td>
+        <td className="px-6 py-4">
+          {timeArray[1]}
+        </td>
         <td className="px-6 py-4">{campLocation}</td>
         <td className="px-6 py-4">{healthcareProfessionalName}</td>
         <td className="px-6 py-4">{organizerName}</td>
         <td className="px-6 py-4">{organizerEmail}</td>
         <td className="px-6 py-4">
           <div className="flex items-center gap-2">
-            <button className="flex p-2.5 bg-yellow-500 rounded-xl hover:rounded-3xl hover:bg-yellow-600 transition-all duration-300 text-white">
+            <button
+              onClick={() => setShowModal(true)}
+              className="flex p-2.5 bg-yellow-500 rounded-xl hover:rounded-3xl hover:bg-yellow-600 transition-all duration-300 text-white"
+            >
               <FaRegEdit size={20} />
             </button>
+
+            {showModal && (
+              <UpdateModal setShowModal={setShowModal} camp={camp} />
+            )}
             <button
-              onClick={()=>handleDelete(_id)}
+              onClick={() => handleDelete(_id)}
               className="flex p-2.5 bg-red-500 rounded-xl hover:rounded-3xl hover:bg-red-600 transition-all duration-300 text-white"
             >
               <MdDeleteForever size={20} />
