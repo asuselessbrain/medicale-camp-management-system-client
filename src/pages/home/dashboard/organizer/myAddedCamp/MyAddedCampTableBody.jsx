@@ -2,13 +2,12 @@ import { FaRegEdit } from "react-icons/fa";
 import { MdDeleteForever } from "react-icons/md";
 import UpdateModal from "./UpdateModal";
 import { useState } from "react";
+import PropTypes from "prop-types";
 
 const MyAddedCampTableBody = ({
   camp,
   index,
   handleDelete,
-  handleUpdate,
-  updateCamp,
 }) => {
   const {
     _id,
@@ -25,7 +24,6 @@ const MyAddedCampTableBody = ({
   const [showModal, setShowModal] = useState(false);
 
   const timeArray = campTime.split("T");
-  console.log(timeArray);
 
   return (
     <tbody>
@@ -75,6 +73,12 @@ const MyAddedCampTableBody = ({
       </tr>
     </tbody>
   );
+};
+
+MyAddedCampTableBody.propTypes = {
+  camp: PropTypes.object.isRequired,
+  index: PropTypes.number.isRequired,
+  handleDelete: PropTypes.func.isRequired
 };
 
 export default MyAddedCampTableBody;

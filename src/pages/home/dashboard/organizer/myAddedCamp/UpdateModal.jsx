@@ -1,16 +1,14 @@
+import PropTypes from "prop-types";
 
 const UpdateModal = ({ setShowModal, camp }) => {
   const {
     _id,
     campName,
-    imageLink,
     campFee,
     campTime,
     campLocation,
     healthcareProfessionalName,
     description,
-    organizerEmail,
-    organizerName,
   } = camp;
 
   return (
@@ -172,6 +170,11 @@ const UpdateModal = ({ setShowModal, camp }) => {
       </div>
     </div>
   );
+};
+
+UpdateModal.propTypes = {
+  camp: PropTypes.object.isRequired,
+  setShowModal: PropTypes.func.isRequired,
 };
 
 export default UpdateModal;
