@@ -1,6 +1,9 @@
 import PropTypes from "prop-types";
+import useAxiosProtected from "../../../../../hooks/useAxiosProtected";
+import { toast } from "react-toastify";
 
-const UpdateModal = ({ setShowModal, camp }) => {
+const UpdateModal = ({ setShowModal, camp, refetch }) => {
+  const axiosProtected = useAxiosProtected();
   const {
     _id,
     campName,
@@ -10,6 +13,36 @@ const UpdateModal = ({ setShowModal, camp }) => {
     healthcareProfessionalName,
     description,
   } = camp;
+
+  const handleUpdate = async (e, id) => {
+    e.preventDefault();
+    const campName = e.target.campName?.value;
+    const campFee = e.target.campFee?.value;
+    const campTime = e.target.campTime?.value;
+    const campLocation = e.target.campLocation?.value;
+    const healthcareProfessionalName =
+      e.target.healthcareProfessionalName?.value;
+    const description = e.target.description?.value;
+
+    const updatedData = {
+      campName,
+      campFee,
+      campTime,
+      campLocation,
+      healthcareProfessionalName,
+      description,
+    };
+    const { data } = await axiosProtected.put(
+      `/update-camp/${id}`,
+      updatedData
+    );
+
+    if (data.modifiedCount > 0) {
+      refetch();
+      setShowModal(false);
+      toast.success("Updated Successfully!");
+    }
+  };
 
   return (
     <div
@@ -50,7 +83,7 @@ const UpdateModal = ({ setShowModal, camp }) => {
             </button>
           </div>
           {/* <!-- Modal body --> */}
-          <form className="p-4 md:p-5">
+          <form onSubmit={(e) => handleUpdate(e, _id)} className="p-4 md:p-5">
             <div className="grid gap-4 mb-4 grid-cols-2">
               <div className="col-span-2">
                 <label
@@ -108,7 +141,7 @@ const UpdateModal = ({ setShowModal, camp }) => {
                 <input
                   type="datetime-local"
                   name="campTime"
-                    defaultValue={campTime}
+                  defaultValue={campTime}
                   id="campTime"
                   className="block w-full rounded-md border-gray-300 shadow-sm focus:border-[#8c0327] focus:ring-[#8c0327] focus:ring-opacity-50 p-3 bg-white"
                 />
@@ -140,6 +173,7 @@ const UpdateModal = ({ setShowModal, camp }) => {
                 </label>
                 <textarea
                   id="description"
+                  name="description"
                   defaultValue={description}
                   rows="4"
                   className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"

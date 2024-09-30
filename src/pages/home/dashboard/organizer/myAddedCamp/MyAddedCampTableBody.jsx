@@ -8,6 +8,7 @@ const MyAddedCampTableBody = ({
   camp,
   index,
   handleDelete,
+  refetch
 }) => {
   const {
     _id,
@@ -60,7 +61,7 @@ const MyAddedCampTableBody = ({
             </button>
 
             {showModal && (
-              <UpdateModal setShowModal={setShowModal} camp={camp} />
+              <UpdateModal setShowModal={setShowModal} camp={camp} refetch={refetch} />
             )}
             <button
               onClick={() => handleDelete(_id)}

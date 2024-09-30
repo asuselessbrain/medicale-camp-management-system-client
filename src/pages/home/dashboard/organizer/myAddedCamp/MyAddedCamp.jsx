@@ -40,6 +40,8 @@ const MyAddedCamp = () => {
     });
   };
 
+  
+
   return (
     <div className="container bg-gray-100 mx-auto p-4 rounded-xl">
       <h2 className="text-7xl mx-auto font-semibold text-center font-dancing-script mt-2 mb-10 text-blue-500">
@@ -88,6 +90,7 @@ const MyAddedCamp = () => {
               camp={camp}
               index={index}
               handleDelete={handleDelete}
+              refetch={refetch}
             />
           ))}
         </table>
