@@ -1,43 +1,90 @@
-const CampCard = () => {
+import { IoLocationSharp, IoPeople } from "react-icons/io5";
+import PropTypes from "prop-types";
+import { MdDateRange } from "react-icons/md";
+import { FaArrowAltCircleRight, FaRegClock, FaStarHalfAlt } from "react-icons/fa";
+import { TbCoinTakaFilled } from "react-icons/tb";
+import { FaUserDoctor } from "react-icons/fa6";
+
+const CampCard = ({ popularCamp }) => {
+  const {
+    imageLink,
+    campName,
+    description,
+    campFee,
+    campTime,
+    campLocation,
+    participantCount,
+    rating,
+    healthcareProfessionalName,
+    organizerEmail,
+    organizerName,
+  } = popularCamp;
+
+  const campTimeArr = campTime.split("T");
   return (
-    <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-      <a href="#">
-        <img className="rounded-t-lg" src="https://i.ibb.co.com/8MpXGTj/giant-142771.jpg" alt="" />
-      </a>
-      <div className="p-5">
-        <a href="#">
+    <div className="bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+      <div>
+        <img className="rounded-t-lg h-80 mx-auto" src={imageLink} alt="" />
+      </div>
+      <div className="flex gap-1 items-center px-4 mb-3 mt-6 text-gray-700 dark:text-gray-400">
+        <IoLocationSharp size={24} />
+        <p>{campLocation}</p>
+      </div>
+      <div className="px-5">
+        <div className="flex items-center justify-between py-4">
           <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-            Noteworthy technology acquisitions 2021
+            {campName}
           </h5>
-        </a>
+          <div className="flex items-center gap-1 text-gray-600 dark:text-gray-400">
+            <FaStarHalfAlt size={20} />
+            <p>{rating}</p>
+          </div>
+        </div>
         <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
-          Here are the biggest enterprise technology acquisitions of 2021 so
-          far, in reverse chronological order.
+          {description}
         </p>
+
+        <div className="flex items-center gap-1 text-gray-600 dark:text-gray-400">
+          <FaUserDoctor size={20} />
+          <p>{healthcareProfessionalName}</p>
+        </div>
+
+        <div className="flex items-center justify-between py-4">
+          <div className="flex items-center gap-6">
+            <div className="flex items-center gap-1 text-gray-600 dark:text-gray-400">
+              <MdDateRange size={20} />
+              <p>{campTimeArr[0]}</p>
+            </div>
+            <div className="flex items-center gap-1 text-gray-600 dark:text-gray-400">
+              <FaRegClock size={20} />
+              <p>{campTimeArr[1]}</p>
+            </div>
+          </div>
+          <div className="flex items-center gap-6">
+            <div className="flex items-center gap-1 text-gray-600 dark:text-gray-400">
+              <TbCoinTakaFilled size={20} />
+              <p>{campFee}</p>
+            </div>
+            <div className="flex items-center gap-1 text-gray-600 dark:text-gray-400">
+              <IoPeople size={20} />
+              <p>{participantCount}</p>
+            </div>
+          </div>
+        </div>
         <a
           href="#"
-          className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+          className="mb-6 gap-4 inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
         >
-          Read more
-          <svg
-            className="rtl:rotate-180 w-3.5 h-3.5 ms-2"
-            aria-hidden="true"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 14 10"
-          >
-            <path
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M1 5h12m0 0L9 1m4 4L9 9"
-            />
-          </svg>
+          Read more 
+          <FaArrowAltCircleRight size={20} />
         </a>
       </div>
     </div>
   );
+};
+
+CampCard.propTypes = {
+  popularCamp: PropTypes.object.isRequired,
 };
 
 export default CampCard;

@@ -55,9 +55,9 @@ const MyAddedCamp = () => {
               <th scope="col" className="px-6 py-3">
                 Camp Name
               </th>
-              <th scope="col" className="px-6 py-3">
+              {/* <th scope="col" className="px-6 py-3">
                 Image
-              </th>
+              </th> */}
               <th scope="col" className="px-6 py-3">
                 Camp Fees
               </th>

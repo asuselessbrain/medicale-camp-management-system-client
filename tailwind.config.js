@@ -16,6 +16,9 @@ export default {
         600: '600',
         700: '700',
       },
+      boxShadow: {
+        'custom': '0px 10px 78px -9px rgba(102, 101, 102, 0.86)',
+      },
     },
   },
   plugins: [

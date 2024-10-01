@@ -13,7 +13,6 @@ const MyAddedCampTableBody = ({
   const {
     _id,
     campName,
-    imageLink,
     campFee,
     campTime,
     campLocation,
@@ -37,9 +36,9 @@ const MyAddedCampTableBody = ({
           {campName}
         </th>
 
-        <td className="px-6 py-4">
+        {/* <td className="px-6 py-4">
           <img src={imageLink} className="w-12" alt="" />
-        </td>
+        </td> */}
         <td className="px-6 py-4">{campFee} Tk</td>
         <td className="px-6 py-4">
           {timeArray[0]} 
@@ -79,7 +78,8 @@ const MyAddedCampTableBody = ({
 MyAddedCampTableBody.propTypes = {
   camp: PropTypes.object.isRequired,
   index: PropTypes.number.isRequired,
-  handleDelete: PropTypes.func.isRequired
+  handleDelete: PropTypes.func.isRequired,
+  refetch: PropTypes.func.isRequired
 };
 
 export default MyAddedCampTableBody;
