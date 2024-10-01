@@ -3,6 +3,7 @@ import MainLayout from "../mainLayout/MainLayout";
 import Home from "../pages/home/Home";
 import Login from "../pages/home/login/Login";
 import Registration from "../pages/home/registration/Registration";
+import AvailableCamp from "../pages/availableCamp/AvailableCamp";
 
 const router = createBrowserRouter([
   {
@@ -12,7 +13,11 @@ const router = createBrowserRouter([
         {
             path: "/",
             element: <Home />
-        }
+        },
+        {
+          path: "/available-camp",
+          element: <AvailableCamp />
+      }
     ]
   },
   {

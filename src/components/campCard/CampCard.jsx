@@ -16,13 +16,11 @@ const CampCard = ({ popularCamp }) => {
     participantCount,
     rating,
     healthcareProfessionalName,
-    organizerEmail,
-    organizerName,
   } = popularCamp;
 
   const campTimeArr = campTime.split("T");
   return (
-    <div className="bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+    <div className="bg-white border border-gray-200 rounded-lg shadow-2xl dark:bg-gray-800 dark:border-gray-700 hover:scale-105 duration-1000 hover:shadow-[rgba(0,_0,_0,_0.4)_0px_30px_90px]">
       <div>
         <img className="rounded-t-lg h-80 mx-auto" src={imageLink} alt="" />
       </div>
@@ -71,13 +69,12 @@ const CampCard = ({ popularCamp }) => {
             </div>
           </div>
         </div>
-        <a
-          href="#"
+        <button
           className="mb-6 gap-4 inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
         >
-          Read more 
+          View Details
           <FaArrowAltCircleRight size={20} />
-        </a>
+        </button>
       </div>
     </div>
   );

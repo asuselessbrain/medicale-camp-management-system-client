@@ -5,7 +5,7 @@ import ScrollToTop from "../components/ScrollToTop/ScrollToTop";
 const MainLayout = () => {
   return (
     <div className="max-w-[1560px] mx-auto">
-      <div className="h-[84px] lg:h-[99px]">
+      <div className="h-[84px] lg:h-[112px]">
         <NavBar />
       </div>
       <ScrollToTop />

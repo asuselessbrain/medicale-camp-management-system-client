@@ -16,8 +16,8 @@ const NavBar = () => {
     });
   };
   const navLinks = [
-    { href: "#home", label: "Home" },
-    { href: "#products", label: "Available Camps" },
+    { to: "/", label: "Home" },
+    { to: "/available-camp", label: "Available Camps" },
     { href: "#about-us", label: "About Us" },
     { href: "#contact-us", label: "Contact Us" },
   ];
@@ -33,12 +33,11 @@ const NavBar = () => {
           <ul className="flex-1 flex justify-center items-center gap-12 max-lg:hidden">
             {navLinks.map((item) => (
               <li key={item.label}>
-                <a
-                  href={item.href}
+                <Link to={item.to}
                   className="font-montserrat leading-normal text-lg text-slate-gray"
                 >
                   {item.label}
-                </a>
+                </Link>
               </li>
             ))}
           </ul>
@@ -93,12 +92,11 @@ const NavBar = () => {
                   onClick={() => setIsMenuOpen(false)}
                   className="my-2"
                 >
-                  <a
-                    href={item.href}
+                  <Link to={item.to}
                     className="font-montserrat leading-normal text-lg text-slate-gray"
                   >
                     {item.label}
-                  </a>
+                  </Link>
                 </li>
               ))}
 
