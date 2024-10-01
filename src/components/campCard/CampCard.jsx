@@ -1,12 +1,19 @@
 import { IoLocationSharp, IoPeople } from "react-icons/io5";
 import PropTypes from "prop-types";
 import { MdDateRange } from "react-icons/md";
-import { FaArrowAltCircleRight, FaRegClock, FaStarHalfAlt } from "react-icons/fa";
+import {
+  FaArrowAltCircleRight,
+  FaCalendarAlt,
+  FaRegClock,
+  FaStarHalfAlt,
+} from "react-icons/fa";
 import { TbCoinTakaFilled } from "react-icons/tb";
 import { FaUserDoctor } from "react-icons/fa6";
+import { Link } from "react-router-dom";
 
 const CampCard = ({ popularCamp }) => {
   const {
+    _id,
     imageLink,
     campName,
     description,
@@ -69,12 +76,12 @@ const CampCard = ({ popularCamp }) => {
             </div>
           </div>
         </div>
-        <button
-          className="mb-6 gap-4 inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-        >
-          View Details
-          <FaArrowAltCircleRight size={20} />
-        </button>
+        <Link to={`/available-camp/${_id}`}>
+          <button className="mb-6 gap-4 inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+            View Details
+            <FaArrowAltCircleRight size={20} />
+          </button>
+        </Link>
       </div>
     </div>
   );

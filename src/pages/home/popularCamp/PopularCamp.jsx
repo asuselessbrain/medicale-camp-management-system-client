@@ -15,7 +15,6 @@ const PopularCamp = () => {
       return data;
     },
   });
-  console.log(popularCamps);
 
   if (isLoading) {
     return <Spinner />;
@@ -23,7 +22,7 @@ const PopularCamp = () => {
   return (
     <div>
       <Title title="Popular Camp" />
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
         {popularCamps.map((popularCamp) => (
           <CampCard key={popularCamp._id} popularCamp={popularCamp} />
         ))}
@@ -65,7 +64,7 @@ const PopularCamp = () => {
             </svg>
           </span>
           <span className="relative w-full text-left transition-colors duration-200 ease-in-out group-hover:text-white">
-            Button Text
+            View More
           </span>
         </Link>
       </div>
