@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import { MdDateRange } from "react-icons/md";
 import {
   FaArrowAltCircleRight,
-  FaCalendarAlt,
   FaRegClock,
   FaStarHalfAlt,
 } from "react-icons/fa";
@@ -27,7 +26,7 @@ const CampCard = ({ popularCamp }) => {
 
   const campTimeArr = campTime.split("T");
   return (
-    <div className="bg-white border border-gray-200 rounded-lg shadow-2xl dark:bg-gray-800 dark:border-gray-700 hover:scale-105 duration-1000 hover:shadow-[rgba(0,_0,_0,_0.4)_0px_30px_90px]">
+    <div className="bg-white border-2 border-gray-200 rounded-lg shadow-2xl dark:bg-gray-800 dark:border-gray-700 duration-1000 hover:shadow-[rgba(0,_0,_0,_0.4)_0px_30px_90px]">
       <div>
         <img className="rounded-t-lg h-80 mx-auto" src={imageLink} alt="" />
       </div>
