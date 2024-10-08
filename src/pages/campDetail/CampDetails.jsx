@@ -45,18 +45,21 @@ const CampDetails = () => {
   } = campData;
 
   return (
-    <div className="flex flex-col md:flex-row items-center justify-between">
-      <div>
+    <div style={{minHeight: 'calc(100vh - 120px)'}} className="flex flex-col md:flex-row items-center justify-between gap-6">
+      <div className="flex-1">
         <h2>{campName}</h2>
       </div>
       <div>
-        <img src={imageLink} alt="" />
+        <img className="rounded" src={imageLink} alt="" />
       </div>
-      <div>
-        <p>Camp Fee: {campFee}</p>
-        <p className="flex items-center gap-2">
-          <Rating style={{ maxWidth: 100 }} value={rating} readOnly /> ({rating})
+      <div className="flex-1 flex flex-col gap-6">
+        <div className="flex items-center justify-between gap-6 md:gap-0 ">
+        <p className="text-2xl font-semibold">Camp Fee: {campFee}</p>
+        <p className="flex items-center gap-2 text-2xl font-semibold">
+          <Rating style={{ maxWidth: 100 }} value={rating} readOnly />
         </p>
+      </div>
+      <button className="bg-black text-white px-6 py-4 rounded-xl border-none font-semibold">Join Now</button>
       </div>
     </div>
   );

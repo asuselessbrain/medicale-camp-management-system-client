@@ -27,8 +27,9 @@ const CampCard = ({ popularCamp }) => {
   const campTimeArr = campTime.split("T");
   return (
     <div className="bg-white border-2 border-gray-200 rounded-lg shadow-2xl dark:bg-gray-800 dark:border-gray-700 duration-1000 hover:shadow-[rgba(0,_0,_0,_0.4)_0px_30px_90px]">
-      <div>
-        <img className="rounded-t-lg h-80 mx-auto" src={imageLink} alt="" />
+      <div className="flex  flex-col items-start justify-between h-full">
+      <div className="mx-auto">
+        <img className="rounded-t-lg h-56 mx-auto" src={imageLink} alt="" />
       </div>
       <div className="flex gap-1 items-center px-4 mb-3 mt-6 text-gray-700 dark:text-gray-400">
         <IoLocationSharp size={24} />
@@ -48,13 +49,14 @@ const CampCard = ({ popularCamp }) => {
           {description}
         </p>
 
-        <div className="flex items-center gap-1 text-gray-600 dark:text-gray-400">
+       
+       <div className="flex items-center gap-1 text-gray-600 dark:text-gray-400">
           <FaUserDoctor size={20} />
           <p>{healthcareProfessionalName}</p>
         </div>
 
         <div className="flex items-center justify-between py-4">
-          <div className="flex items-center gap-6">
+          <div className="flex items-center gap-4">
             <div className="flex items-center gap-1 text-gray-600 dark:text-gray-400">
               <MdDateRange size={20} />
               <p>{campTimeArr[0]}</p>
@@ -64,7 +66,7 @@ const CampCard = ({ popularCamp }) => {
               <p>{campTimeArr[1]}</p>
             </div>
           </div>
-          <div className="flex items-center gap-6">
+          <div className="flex items-center gap-4">
             <div className="flex items-center gap-1 text-gray-600 dark:text-gray-400">
               <TbCoinTakaFilled size={20} />
               <p>{campFee}</p>
@@ -81,6 +83,7 @@ const CampCard = ({ popularCamp }) => {
             <FaArrowAltCircleRight size={20} />
           </button>
         </Link>
+       </div>
       </div>
     </div>
   );
