@@ -2,14 +2,6 @@ import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 import useAxiosProtected from "../../hooks/useAxiosProtected";
 import Spinner from "../../components/spinner/Spinner";
-import {
-  CiBadgeDollar,
-  CiCircleCheck,
-  CiLocationOn,
-  CiStethoscope,
-  CiUser,
-} from "react-icons/ci";
-import { useState } from "react";
 import { Rating } from "@smastrom/react-rating";
 import "@smastrom/react-rating/style.css";
 import { FaUserDoctor } from "react-icons/fa6";
@@ -36,7 +28,7 @@ const CampDetails = () => {
   }
 
   const {
-    _id,
+    // _id,
     imageLink,
     campName,
     description,
@@ -52,7 +44,7 @@ const CampDetails = () => {
   const campTimeArr = campTime.split("T");
 
   return (
-    <div style={{ minHeight: "calc(100vh - 8z0px)" }} className="flex flex-col items-center justify-center p-4">
+    <div style={{ minHeight: "calc(100vh - 280px)" }} className="flex flex-col items-center justify-center p-4">
       <h2 className="text-2xl mb-6 md:mb-10 font-bold text-center">Publish Date:<span className="font-semibold text-xl">{ new Date(publishDate).toLocaleString()}</span></h2>
       <div
         className="flex flex-col md:flex-row items-center justify-between gap-6"
