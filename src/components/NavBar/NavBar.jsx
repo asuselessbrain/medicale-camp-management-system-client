@@ -24,7 +24,7 @@ const NavBar = () => {
 
   return (
     <div className="fixed z-10 w-full max-w-[1440px]">
-      <header className="sm:px-8 px-4 py-6 bg-gray-700 text-white z-10 w-full">
+      <header className="sm:px-8 px-4 py-2 bg-gray-700 text-white z-10 w-full">
         <nav className="flex justify-between items-center">
           <Link to="/" className="flex items-center gap-2">
             <img src={logo} className="w-16" alt="logo" />
@@ -69,7 +69,7 @@ const NavBar = () => {
       </header>
       {isMenuOpen && (
         <div>
-          <nav className="fixed w-1/2 top-0 right-0 left-0 z-10 bottom-0 lg:bottom-auto bg-slate-100">
+          <nav className="fixed w-2/3 top-0 right-0 left-0 z-10 bottom-0 lg:bottom-auto bg-slate-100">
             <div
               className="hidden max-lg:block fixed right-0  px-4 py-8 cursor-pointer"
               onClick={() => {
