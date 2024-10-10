@@ -6,17 +6,17 @@ import Spinner from "../../components/spinner/Spinner";
 import PaginationDesign from "../../components/peginationDesign/PaginationDesign";
 import SearchBar from "../../components/searchBar/SearchBar";
 import { useState } from "react";
-import img from "../../assets/images/reset.png";
 import ResetBtn from "../../components/resetBtn/ResetBtn";
 
 const AvailableCamp = () => {
   const axiosPublic = useAxiosPublic();
   const [search, setSearch] = useState("");
+  const [searchLocation, setSearchLocation] = useState("");
 
   const { data: availableCamp = [], isLoading } = useQuery({
-    queryKey: ["availableCamp", search],
+    queryKey: ["availableCamp", search, searchLocation],
     queryFn: async () => {
-      const { data } = await axiosPublic(`/all-camp?search=${search}`);
+      const { data } = await axiosPublic(`/all-camp?search=${search}&searchLocation=${searchLocation}`);
       return data;
     },
   });
@@ -32,15 +32,21 @@ const AvailableCamp = () => {
     setSearch(searchResult);
     console.log(searchResult);
   };
+  const handelLocation = e => {
+    e.preventDefault();
+    const location = e.target.searchLocation.value;
+    setSearchLocation(location)
+  }
 
   const handleReset = () => {
     setSearch("");
+    setSearchLocation("")
   };
 
   return (
     <div className="p-4">
       <Title title="Available Camp" />
-      <SearchBar handleSearch={handleSearch} />
+      <SearchBar handleSearch={handleSearch} handelLocation={handelLocation} />
       <ResetBtn handleReset={handleReset} />
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         {availableCamp.map((popularCamp) => (
