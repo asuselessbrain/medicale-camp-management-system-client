@@ -7,6 +7,7 @@ import PaginationDesign from "../../components/peginationDesign/PaginationDesign
 import SearchBar from "../../components/searchBar/SearchBar";
 import { useState } from "react";
 import ResetBtn from "../../components/resetBtn/ResetBtn";
+import NoCampFound from "../../components/noCampFound/NoCampFound";
 
 const AvailableCamp = () => {
   const axiosPublic = useAxiosPublic();
@@ -23,6 +24,10 @@ const AvailableCamp = () => {
 
   if (isLoading) {
     return <Spinner />;
+  }
+  
+  if(availableCamp.length === 0){
+    return <NoCampFound />
   }
 
   const handleSearch = (e) => {
