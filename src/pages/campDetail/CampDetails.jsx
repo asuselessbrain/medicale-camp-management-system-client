@@ -9,11 +9,22 @@ import { MdDateRange } from "react-icons/md";
 import { FaRegClock } from "react-icons/fa";
 import { TbCoinTakaFilled } from "react-icons/tb";
 import { IoLocationSharp, IoPeople } from "react-icons/io5";
+import JoinCampModal from "./JoinCampModal";
+import { useState } from "react";
 
 const CampDetails = () => {
   const { id } = useParams();
   const axiosProtected = useAxiosProtected();
   // const [ratings, setRating] = useState(rating);
+  const [isOpen, setIsOpen] = useState(false)
+
+  function open() {
+    setIsOpen(true)
+  }
+
+  function close() {
+    setIsOpen(false)
+  }
 
   const { data: campData = [], isPending } = useQuery({
     queryKey: ["campData"],
@@ -42,6 +53,7 @@ const CampDetails = () => {
   } = campData;
 
   const campTimeArr = campTime.split("T");
+
 
   return (
     <div style={{ minHeight: "calc(100vh - 280px)" }} className="flex flex-col items-center justify-center p-4">
@@ -99,11 +111,14 @@ const CampDetails = () => {
               readOnly
             />
           </div>
-          <button className="bg-black text-white px-6 py-4 rounded-xl border-none font-semibold">
+          <button onClick={open} className="btn bg-black text-white px-6 py-4 rounded-xl border-none font-semibold">
             Join Now
           </button>
         </div>
       </div>
+     {
+      isOpen &&  <JoinCampModal isOpen={isOpen} close={close} />
+     }
     </div>
   );
 };
