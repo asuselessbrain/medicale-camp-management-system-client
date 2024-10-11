@@ -1,7 +1,15 @@
 import PropTypes from "prop-types";
-import { Button, Dialog, DialogPanel, DialogTitle } from "@headlessui/react";
+import { Dialog, DialogPanel, DialogTitle } from "@headlessui/react";
+import useAuth from "../../hooks/useAuth";
 
-const JoinCampModal = ({ isOpen, close }) => {
+const JoinCampModal = ({ isOpen, close, campData }) => {
+  const {user} = useAuth()
+  const {
+    campName,
+    campFee,
+    campLocation,
+    healthcareProfessionalName,
+  } = campData;
   return (
     <Dialog
       open={isOpen}
@@ -13,7 +21,7 @@ const JoinCampModal = ({ isOpen, close }) => {
         <div className="flex min-h-full items-center mt-6 justify-center p-4">
           <DialogPanel
             transition
-            className="w-full max-w-3xl rounded-xl bg-white/5 p-6 bg-gray-400 duration-300 ease-out data-[closed]:transform-[scale(95%)] data-[closed]:opacity-0"
+            className="w-full max-w-3xl rounded-xl bg-white/5 p-6 bg-gray-500 duration-300 ease-out data-[closed]:transform-[scale(95%)] data-[closed]:opacity-0"
           >
             <DialogTitle
               as="h3"
@@ -29,6 +37,7 @@ const JoinCampModal = ({ isOpen, close }) => {
                   name="campName"
                   id="campName"
                   readOnly
+                  defaultValue={campName}
                   className="block py-2.5 px-0 w-full text-sm text-white bg-transparent border-0 border-b-2 border-white appearance-none dark:text-white dark:border-white dark:focus:border-white focus:outline-none focus:ring-0 focus:border-white peer"
                   placeholder=" "
                   required
@@ -44,6 +53,7 @@ const JoinCampModal = ({ isOpen, close }) => {
                 <input
                   type="number"
                   name="campFee"
+                  defaultValue={campFee}
                   readOnly
                   className="block py-2.5 px-0 w-full text-sm text-white bg-transparent border-0 border-b-2 border-white appearance-none dark:text-white dark:border-white dark:focus:border-white focus:outline-none focus:ring-0 focus:border-white peer"
                   placeholder=" "
@@ -61,6 +71,7 @@ const JoinCampModal = ({ isOpen, close }) => {
                   type="text"
                   name="campLocation"
                   id="campLocation"
+                  defaultValue={campLocation}
                   readOnly
                   className="block py-2.5 px-0 w-full text-sm text-white bg-transparent border-0 border-b-2 border-white appearance-none dark:text-white dark:border-white dark:focus:border-white focus:outline-none focus:ring-0 focus:border-white peer"
                   placeholder=" "
@@ -79,6 +90,7 @@ const JoinCampModal = ({ isOpen, close }) => {
                     type="text"
                     name="healthcareProfessionalName"
                     id="healthcareProfessionalName"
+                    defaultValue={healthcareProfessionalName}
                     readOnly
                     className="block py-2.5 px-0 w-full text-sm text-white bg-transparent border-0 border-b-2 border-white appearance-none dark:text-white dark:border-white dark:focus:border-white focus:outline-none focus:ring-0 focus:border-white peer"
                     placeholder=" "
@@ -95,6 +107,7 @@ const JoinCampModal = ({ isOpen, close }) => {
                   <input
                     type="text"
                     name="participantName"
+                    defaultValue={user?.displayName}
                     id="participantName"
                     className="block py-2.5 px-0 w-full text-sm text-white bg-transparent border-0 border-b-2 border-white appearance-none dark:text-white dark:border-white dark:focus:border-white focus:outline-none focus:ring-0 focus:border-white peer"
                     placeholder=" "
@@ -112,6 +125,7 @@ const JoinCampModal = ({ isOpen, close }) => {
                 <div className="relative z-0 w-full mb-5 group">
                   <input
                     type="email"
+                    defaultValue={user?.email}
                     pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
                     name="participantEmail"
                     id="participantEmail"
@@ -164,9 +178,9 @@ const JoinCampModal = ({ isOpen, close }) => {
                 <div className="relative z-0 w-full mb-5 group">
                   <select
                     id="countries"
-                    className="block py-2.5 px-3 w-full text-sm text-white bg-gray-400 border-0 border-b-2 border-white appearance-none dark:text-white dark:border-white dark:focus:border-white focus:outline-none focus:ring-0 focus:border-white peer"
+                    className="block py-2.5 px-3 w-full text-sm text-white bg-gray-500 border-0 border-b-2 border-white appearance-none dark:text-white dark:border-white dark:focus:border-white focus:outline-none focus:ring-0 focus:border-white peer"
                   >
-                    <option selected>Gender</option>
+                    <option defaultValue="">Gender</option>
                     <option value="male">Male</option>
                     <option value="female">Female</option>
                     <option value="others">Others</option>
@@ -207,6 +221,7 @@ const JoinCampModal = ({ isOpen, close }) => {
 JoinCampModal.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   close: PropTypes.func.isRequired,
+  campData: PropTypes.object.isRequired,
 };
 
 export default JoinCampModal;

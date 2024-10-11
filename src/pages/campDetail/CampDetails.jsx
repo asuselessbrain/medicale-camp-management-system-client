@@ -117,7 +117,7 @@ const CampDetails = () => {
         </div>
       </div>
      {
-      isOpen &&  <JoinCampModal isOpen={isOpen} close={close} />
+      isOpen &&  <JoinCampModal isOpen={isOpen} close={close} campData={campData} />
      }
     </div>
   );
