@@ -18,10 +18,10 @@ const JoinCampModal = ({ isOpen, close, campData }) => {
       onClose={close}
     >
       <div className="fixed inset-0 z-10 w-screen overflow-y-auto">
-        <div className="flex min-h-full items-center mt-6 justify-center p-4">
+        <div className="flex min-h-full items-center my-24 mx-2 md:my-0 md:mx-0 justify-center">
           <DialogPanel
             transition
-            className="w-full max-w-3xl rounded-xl bg-white/5 p-6 bg-gray-500 duration-300 ease-out data-[closed]:transform-[scale(95%)] data-[closed]:opacity-0"
+            className="w-full max-w-3xl rounded-xl bg-white/5 p-6 bg-gray-400 duration-300 ease-out data-[closed]:transform-[scale(95%)] data-[closed]:opacity-0"
           >
             <DialogTitle
               as="h3"
@@ -31,7 +31,7 @@ const JoinCampModal = ({ isOpen, close, campData }) => {
             </DialogTitle>
 
             <form className="max-w-md mx-auto">
-              <div className="relative z-0 w-full mb-5 group">
+              <div className="relative z-0 w-full mb-10 group">
                 <input
                   type="text"
                   name="campName"
@@ -49,7 +49,7 @@ const JoinCampModal = ({ isOpen, close, campData }) => {
                   Camp Name
                 </label>
               </div>
-              <div className="relative z-0 w-full mb-5 group">
+              <div className="relative z-0 w-full mb-10 group">
                 <input
                   type="number"
                   name="campFee"
@@ -66,7 +66,7 @@ const JoinCampModal = ({ isOpen, close, campData }) => {
                   Camp Fee
                 </label>
               </div>
-              <div className="relative z-0 w-full mb-5 group">
+              <div className="relative z-0 w-full mb-10 group">
                 <input
                   type="text"
                   name="campLocation"
@@ -85,7 +85,7 @@ const JoinCampModal = ({ isOpen, close, campData }) => {
                 </label>
               </div>
               <div className="grid md:grid-cols-2 md:gap-6">
-                <div className="relative z-0 w-full mb-5 group">
+                <div className="relative z-0 w-full mb-10 group">
                   <input
                     type="text"
                     name="healthcareProfessionalName"
@@ -103,7 +103,7 @@ const JoinCampModal = ({ isOpen, close, campData }) => {
                     Healthcare Professional Name
                   </label>
                 </div>
-                <div className="relative z-0 w-full mb-5 group">
+                <div className="relative z-0 w-full mb-10 group">
                   <input
                     type="text"
                     name="participantName"
@@ -122,7 +122,7 @@ const JoinCampModal = ({ isOpen, close, campData }) => {
                 </div>
               </div>
               <div className="grid md:grid-cols-2 md:gap-6">
-                <div className="relative z-0 w-full mb-5 group">
+                <div className="relative z-0 w-full mb-10 group">
                   <input
                     type="email"
                     defaultValue={user?.email}
@@ -140,7 +140,7 @@ const JoinCampModal = ({ isOpen, close, campData }) => {
                     Participant Email
                   </label>
                 </div>
-                <div className="relative z-0 w-full mb-5 group">
+                <div className="relative z-0 w-full mb-10 group">
                   <input
                     type="number"
                     name="age"
@@ -158,7 +158,7 @@ const JoinCampModal = ({ isOpen, close, campData }) => {
                 </div>
               </div>
               <div className="grid md:grid-cols-2 md:gap-6">
-                <div className="relative z-0 w-full mb-5 group">
+                <div className="relative z-0 w-full mb-10 group">
                   <input
                     type="tel"
                     pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
@@ -175,10 +175,10 @@ const JoinCampModal = ({ isOpen, close, campData }) => {
                     Phone Number
                   </label>
                 </div>
-                <div className="relative z-0 w-full mb-5 group">
+                <div className="relative z-0 w-full mb-10 group">
                   <select
                     id="countries"
-                    className="block py-2.5 px-3 w-full text-sm text-white bg-gray-500 border-0 border-b-2 border-white appearance-none dark:text-white dark:border-white dark:focus:border-white focus:outline-none focus:ring-0 focus:border-white peer"
+                    className="block py-2.5 px-3 w-full text-sm text-white bg-gray-400 border-0 border-b-2 border-white appearance-none dark:text-white dark:border-white dark:focus:border-white focus:outline-none focus:ring-0 focus:border-white peer"
                   >
                     <option defaultValue="">Gender</option>
                     <option value="male">Male</option>
@@ -187,7 +187,7 @@ const JoinCampModal = ({ isOpen, close, campData }) => {
                   </select>
                 </div>
               </div>
-              <div className="relative z-0 w-full mb-5 group">
+              <div className="relative z-0 w-full mb-10 group">
                 <input
                   type="tel"
                   pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
