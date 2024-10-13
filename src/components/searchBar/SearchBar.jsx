@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 
 const SearchBar = ({ handleSearch, handelLocation }) => {
   return (
-    <div className="flex flex-col lg:flex-row items-center mb-10 justify-between">
+    <div className="flex flex-col lg:flex-row items-center gap-6 justify-between flex-1">
       <form
         onSubmit={handleSearch}
         className="mx-auto w-full relative bg-white min-w-sm max-w-2xl flex flex-col md:flex-row items-center justify-center border py-2 px-2 rounded-2xl gap-2 shadow-2xl focus-within:border-gray-300"
@@ -55,7 +55,7 @@ const SearchBar = ({ handleSearch, handelLocation }) => {
         className="mx-auto w-full relative bg-white min-w-sm max-w-2xl flex flex-col md:flex-row items-center justify-center border py-2 px-2 rounded-2xl gap-2 shadow-2xl focus-within:border-gray-300"
       >
         <label htmlFor="searchLocation" className="text-xl font-bold px-2">
-          Search by Location: 
+          Search by Location:
         </label>
         <input
           id="searchLocation"
@@ -103,6 +103,7 @@ const SearchBar = ({ handleSearch, handelLocation }) => {
 
 SearchBar.propTypes = {
   handleSearch: PropTypes.func.isRequired,
+  handelLocation: PropTypes.func.isRequired,
 };
 
 export default SearchBar;

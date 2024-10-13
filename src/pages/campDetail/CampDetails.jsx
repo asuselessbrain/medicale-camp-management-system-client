@@ -11,19 +11,20 @@ import { TbCoinTakaFilled } from "react-icons/tb";
 import { IoLocationSharp, IoPeople } from "react-icons/io5";
 import JoinCampModal from "./JoinCampModal";
 import { useState } from "react";
+import { toast } from "react-toastify";
 
 const CampDetails = () => {
   const { id } = useParams();
   const axiosProtected = useAxiosProtected();
   // const [ratings, setRating] = useState(rating);
-  const [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(false);
 
   function open() {
-    setIsOpen(true)
+    setIsOpen(true);
   }
 
   function close() {
-    setIsOpen(false)
+    setIsOpen(false);
   }
 
   const { data: campData = [], isPending } = useQuery({
@@ -54,13 +55,50 @@ const CampDetails = () => {
 
   const campTimeArr = campTime.split("T");
 
+  const handleJoinCamp = async (e) => {
+    e.preventDefault();
+
+    const form = e.target;
+    const participantName = form.participantName.value;
+    const participantEmail = form.participantEmail.value;
+    const age = form.age.value;
+    const phoneNumber = form.phoneNumber.value;
+    const gender = form.gender.value;
+    const emergencyContact = form.emergencyContact.value;
+    const campFee = form.campFee.value;
+
+    // console.log(typeof(campFee))
+
+    const campFeeNum = parseInt(campFee)
+    console.log(typeof(campFeeNum))
+
+    const participantInfo = {
+      participantName,
+      participantEmail,
+      age,
+      phoneNumber,
+      gender,
+      emergencyContact,
+      status: campFeeNum === 0 ? "Confirmed" : "Pending"
+    };
+    const {data} = await axiosProtected.post('/join-camp', participantInfo)
+    if(data.insertedId){
+      toast.success("Registration Successful!")
+    }
+  };
 
   return (
-    <div style={{ minHeight: "calc(100vh - 280px)" }} className="flex flex-col items-center justify-center p-4">
-      <h2 className="text-2xl mb-6 md:mb-10 font-bold text-center">Publish Date:<span className="font-semibold text-xl">{ new Date(publishDate).toLocaleString()}</span></h2>
-      <div
-        className="flex flex-col md:flex-row items-center justify-between gap-6"
-      >
+    <div
+      style={{ minHeight: "calc(100vh - 280px)" }}
+      className="flex flex-col items-center justify-center p-4"
+    >
+      <h2 className="text-2xl mb-6 md:mb-10 font-bold text-center">
+        Publish Date:
+        <span className="font-semibold text-xl">
+          {new Date(publishDate).toLocaleString()}
+        </span>
+      </h2>
+      <div className="flex flex-col md:flex-row items-center justify-between gap-6">
         <div className="flex-1 space-y-4">
           <h2 className="text-4xl font-bold">{campName}</h2>
           <p>{description}</p>
@@ -111,14 +149,22 @@ const CampDetails = () => {
               readOnly
             />
           </div>
-          <button onClick={open} className="btn bg-black text-white px-6 py-4 rounded-xl border-none font-semibold">
+          <button
+            onClick={open}
+            className="btn bg-black text-white px-6 py-4 rounded-xl border-none font-semibold"
+          >
             Join Now
           </button>
         </div>
       </div>
-     {
-      isOpen &&  <JoinCampModal isOpen={isOpen} close={close} campData={campData} />
-     }
+      {isOpen && (
+        <JoinCampModal
+          isOpen={isOpen}
+          close={close}
+          campData={campData}
+          handleJoinCamp={handleJoinCamp}
+        />
+      )}
     </div>
   );
 };

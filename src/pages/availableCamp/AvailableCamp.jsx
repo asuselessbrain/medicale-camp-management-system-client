@@ -17,7 +17,9 @@ const AvailableCamp = () => {
   const { data: availableCamp = [], isLoading } = useQuery({
     queryKey: ["availableCamp", search, searchLocation],
     queryFn: async () => {
-      const { data } = await axiosPublic(`/all-camp?search=${search}&searchLocation=${searchLocation}`);
+      const { data } = await axiosPublic(
+        `/all-camp?search=${search}&searchLocation=${searchLocation}`
+      );
       return data;
     },
   });
@@ -25,9 +27,9 @@ const AvailableCamp = () => {
   if (isLoading) {
     return <Spinner />;
   }
-  
-  if(availableCamp.length === 0){
-    return <NoCampFound />
+
+  if (availableCamp.length === 0) {
+    return <NoCampFound />;
   }
 
   const handleSearch = (e) => {
@@ -37,22 +39,27 @@ const AvailableCamp = () => {
     setSearch(searchResult);
     console.log(searchResult);
   };
-  const handelLocation = e => {
+  const handelLocation = (e) => {
     e.preventDefault();
     const location = e.target.searchLocation.value;
-    setSearchLocation(location)
-  }
+    setSearchLocation(location);
+  };
 
   const handleReset = () => {
     setSearch("");
-    setSearchLocation("")
+    setSearchLocation("");
   };
 
   return (
     <div className="p-4">
       <Title title="Available Camp" />
-      <SearchBar handleSearch={handleSearch} handelLocation={handelLocation} />
-      <ResetBtn handleReset={handleReset} />
+      <div className="flex items-center justify-between mb-10 gap-6">
+        <SearchBar
+          handleSearch={handleSearch}
+          handelLocation={handelLocation}
+        />
+        <ResetBtn handleReset={handleReset} />
+      </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         {availableCamp.map((popularCamp) => (
           <CampCard key={popularCamp._id} popularCamp={popularCamp} />
