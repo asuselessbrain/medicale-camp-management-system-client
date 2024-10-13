@@ -40,7 +40,7 @@ const CampDetails = () => {
   }
 
   const {
-    // _id,
+    _id,
     imageLink,
     campName,
     description,
@@ -73,6 +73,7 @@ const CampDetails = () => {
     console.log(typeof(campFeeNum))
 
     const participantInfo = {
+      campId: _id,
       participantName,
       participantEmail,
       age,
@@ -82,7 +83,8 @@ const CampDetails = () => {
       status: campFeeNum === 0 ? "Confirmed" : "Pending"
     };
     const {data} = await axiosProtected.post('/join-camp', participantInfo)
-    if(data.insertedId){
+    console.log(data)
+    if(data.result.insertedId && data.updatedResult.modifiedCount > 0){
       toast.success("Registration Successful!")
     }
   };
