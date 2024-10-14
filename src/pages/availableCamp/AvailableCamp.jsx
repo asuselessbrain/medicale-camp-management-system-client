@@ -13,16 +13,48 @@ const AvailableCamp = () => {
   const axiosPublic = useAxiosPublic();
   const [search, setSearch] = useState("");
   const [searchLocation, setSearchLocation] = useState("");
+  const numberOfCampPerPage = 12;
+  const [currentPage, setCurrentPage] = useState(0);
 
   const { data: availableCamp = [], isLoading } = useQuery({
-    queryKey: ["availableCamp", search, searchLocation],
+    queryKey: ["availableCamp", search, searchLocation,currentPage,numberOfCampPerPage],
     queryFn: async () => {
       const { data } = await axiosPublic(
-        `/all-camp?search=${search}&searchLocation=${searchLocation}`
+        `/all-camp?search=${search}&searchLocation=${searchLocation}&currentPage=${currentPage}&numberOfCampPerPage=${numberOfCampPerPage}`
       );
       return data;
     },
   });
+
+  const { data: availableCampNumber = 0, isFetching } = useQuery({
+    queryKey: ["availableCampNumber", search, searchLocation],
+    queryFn: async () => {
+      const { data } = await axiosPublic(
+        `/get-total-camp-number?search=${search}&searchLocation=${searchLocation}`
+      );
+      return data.totalCamp;
+    },
+  });
+
+  const numberOfPages = Math.ceil(availableCampNumber / numberOfCampPerPage);
+
+  const pageNumbering = [...Array(numberOfPages).keys()];
+
+  const handleNextPage = () => {
+    if (currentPage < pageNumbering.length - 1) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
+  const handlePrevPage = () => {
+    if (currentPage > 0) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
+  if (isFetching) {
+    return <Spinner />;
+  }
 
   if (isLoading) {
     return <Spinner />;
@@ -66,7 +98,13 @@ const AvailableCamp = () => {
         ))}
       </div>
 
-      <PaginationDesign />
+      <PaginationDesign
+        pageNumbering={pageNumbering}
+        setCurrentPage={setCurrentPage}
+        handleNextPage={handleNextPage}
+        handlePrevPage={handlePrevPage}
+        currentPage={currentPage}
+      />
     </div>
   );
 };
