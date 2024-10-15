@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 import useUser from "../../../../../hooks/useUser";
 import Swal from "sweetalert2";
 
-const LoadUserRow = ({ user, index }) => {
+const LoadUserRow = ({ user, index, refetch }) => {
   const {
     _id,
     name,
@@ -21,7 +21,6 @@ const LoadUserRow = ({ user, index }) => {
   } = user;
   const [isOpen, setIsOpen] = useState(false);
   const axiosProtected = useAxiosProtected();
-  const [, , refetch] = useUser();
 
   const handleToggle = () => {
     setIsOpen(!isOpen);
@@ -116,6 +115,7 @@ const LoadUserRow = ({ user, index }) => {
 LoadUserRow.propTypes = {
   user: PropTypes.object.isRequired,
   index: PropTypes.number.isRequired,
+  refetch: PropTypes.func.isRequired,
 };
 
 export default LoadUserRow;

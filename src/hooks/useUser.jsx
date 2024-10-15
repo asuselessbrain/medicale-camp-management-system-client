@@ -7,7 +7,7 @@ const useUser = () => {
   const { data: users = [], isLoading, refetch } = useQuery({
     queryKey: ["users"],
     queryFn: async () => {
-      const { data } = await axiosProtected.get("/users");
+      const { data } = await axiosProtected.get(`/users`);
       return data;
     },
   });

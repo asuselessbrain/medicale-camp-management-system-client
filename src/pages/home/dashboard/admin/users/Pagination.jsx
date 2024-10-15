@@ -1,4 +1,6 @@
-const Pagination = () => {
+import PropTypes from "prop-types"
+
+const Pagination = ({numberOfPageArray, setCurrentPage, currentPage}) => {
   return (
     <nav
       className="flex items-center gap-x-1 justify-center my-6"
@@ -27,25 +29,16 @@ const Pagination = () => {
         <span>Previous</span>
       </button>
       <div className="flex items-center gap-x-1">
-        <button
-          type="button"
-          className="min-h-[38px] min-w-[38px] flex justify-center items-center bg-gray-200 text-gray-800 py-2 px-3 text-sm rounded-lg focus:outline-none focus:bg-gray-300 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-600 dark:text-white dark:focus:bg-neutral-500"
-          aria-current="page"
-        >
-          1
-        </button>
-        <button
-          type="button"
-          className="min-h-[38px] min-w-[38px] flex justify-center items-center text-gray-800 hover:bg-gray-100 py-2 px-3 text-sm rounded-lg focus:outline-none focus:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:hover:bg-white/10 dark:focus:bg-white/10"
-        >
-          2
-        </button>
-        <button
-          type="button"
-          className="min-h-[38px] min-w-[38px] flex justify-center items-center text-gray-800 hover:bg-gray-100 py-2 px-3 text-sm rounded-lg focus:outline-none focus:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:hover:bg-white/10 dark:focus:bg-white/10"
-        >
-          3
-        </button>
+        
+          {
+            numberOfPageArray.map(page=> <button key={page}
+                onClick={()=>setCurrentPage(page)}
+                className={`min-h-[38px] min-w-[38px] flex justify-center items-center text-gray-800 py-2 px-3 text-sm rounded-lg focus:outline-none focus:bg-gray-300 disabled:pointer-events-none dark:bg-neutral-600 dark:text-white dark:focus:bg-neutral-500 ${currentPage === page ? "bg-blue-600 text-white" :""}`}
+                aria-current="page"
+                disabled = {currentPage === page}
+              >{page+1}</button>)
+          }
+        
       </div>
       <button
         type="button"
@@ -71,5 +64,10 @@ const Pagination = () => {
     </nav>
   );
 };
+
+Pagination.propTypes = {
+    numberOfPageArray: PropTypes.array.isRequired,
+    setCurrentPage: PropTypes.func.isRequired,
+}
 
 export default Pagination;
