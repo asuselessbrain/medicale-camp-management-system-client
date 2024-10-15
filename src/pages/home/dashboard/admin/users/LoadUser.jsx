@@ -24,20 +24,37 @@ const LoadUser = () => {
     },
   });
  
-  const { data: userCount = 0 } = useQuery({
+  const { data: userCount = 0, isPending } = useQuery({
     queryKey: ["userCount"],
     queryFn: async () => {
       const { data } = await axiosProtected("/user-count");
       return data.result;
     },
   });
+  
 
   const numberOfPages = Math.ceil(userCount / numberOfUsersPerPage);
 
   const numberOfPageArray = [...Array(numberOfPages).keys()];
 
+  const handleNextPage = () => {
+    if (currentPage < numberOfPageArray.length - 1) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
+  const handlePrevPage = () => {
+    if (currentPage > 0) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
   if (isLoading) {
     return <Spinner />;
+  }
+
+  if(isPending){
+    return <Spinner />
   }
   return (
     <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -86,6 +103,8 @@ const LoadUser = () => {
         numberOfPageArray={numberOfPageArray}
         setCurrentPage={setCurrentPage}
         currentPage={currentPage}
+        handleNextPage={handleNextPage}
+        handlePrevPage={handlePrevPage}
       />
     </div>
   );

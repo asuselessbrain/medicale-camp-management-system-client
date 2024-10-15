@@ -1,6 +1,6 @@
 import PropTypes from "prop-types"
 
-const Pagination = ({numberOfPageArray, setCurrentPage, currentPage}) => {
+const Pagination = ({numberOfPageArray, setCurrentPage, currentPage, handleNextPage, handlePrevPage }) => {
   return (
     <nav
       className="flex items-center gap-x-1 justify-center my-6"
@@ -8,9 +8,10 @@ const Pagination = ({numberOfPageArray, setCurrentPage, currentPage}) => {
     >
       <button
         type="button"
+        onClick={handlePrevPage}
         className="min-h-[38px] min-w-[38px] py-2 px-2.5 inline-flex justify-center items-center gap-x-1.5 text-sm rounded-lg text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:hover:bg-white/10 dark:focus:bg-white/10"
         aria-label="Previous"
-        disabled=""
+        disabled={currentPage === 0}
       >
         <svg
           className="shrink-0 size-3.5"
@@ -42,8 +43,10 @@ const Pagination = ({numberOfPageArray, setCurrentPage, currentPage}) => {
       </div>
       <button
         type="button"
+        onClick={handleNextPage}
         className="min-h-[38px] min-w-[38px] py-2 px-2.5 inline-flex justify-center items-center gap-x-1.5 text-sm rounded-lg text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:hover:bg-white/10 dark:focus:bg-white/10"
         aria-label="Next"
+        disabled={currentPage === numberOfPageArray.length - 1}
       >
         <span>Next</span>
         <svg
@@ -68,6 +71,9 @@ const Pagination = ({numberOfPageArray, setCurrentPage, currentPage}) => {
 Pagination.propTypes = {
     numberOfPageArray: PropTypes.array.isRequired,
     setCurrentPage: PropTypes.func.isRequired,
+    currentPage: PropTypes.number.isRequired,
+    handleNextPage: PropTypes.func.isRequired,
+    handlePrevPage: PropTypes.func.isRequired,
 }
 
 export default Pagination;
