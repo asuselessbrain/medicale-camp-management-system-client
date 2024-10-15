@@ -79,6 +79,11 @@ const PaginationDesign = ({
 
 PaginationDesign.propTypes = {
   pageNumbering: PropTypes.array.isRequired,
+  setCurrentPage: PropTypes.func.isRequired,
+  handleNextPage: PropTypes.func.isRequired,
+  handlePrevPage: PropTypes.func.isRequired,
+  currentPage: PropTypes.number.isRequired,
 };
+
 
 export default PaginationDesign;

@@ -1,5 +1,6 @@
 import useUser from "../../../../../hooks/useUser";
 import LoadUserRow from "./LoadUserRow";
+import Pagination from "./Pagination";
 
 const LoadUser = () => {
   const [users] = useUser();
@@ -42,6 +43,8 @@ const LoadUser = () => {
           <LoadUserRow key={user._id} user={user} index={index} />
         ))}
       </table>
+
+      <Pagination />
     </div>
   );
 };
