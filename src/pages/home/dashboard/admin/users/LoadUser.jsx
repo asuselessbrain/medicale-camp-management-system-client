@@ -4,6 +4,7 @@ import Pagination from "./Pagination";
 import useAxiosProtected from "../../../../../hooks/useAxiosProtected";
 import { useState } from "react";
 import Spinner from "../../../../../components/spinner/Spinner";
+import SearchBar from "./SearchBar";
 
 const LoadUser = () => {
   const axiosProtected = useAxiosProtected();
@@ -57,8 +58,9 @@ const LoadUser = () => {
     return <Spinner />
   }
   return (
-    <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
-      <table className="w-full text-left rtl:text-right text-gray-500 dark:text-gray-400">
+    <div className="relative overflow-x-auto">
+      <SearchBar />
+      <table className="w-full shadow-md sm:rounded-3xl text-left rtl:text-right text-gray-500 dark:text-gray-400">
         <thead className="text-gray-700 uppercase bg-gray-200 dark:bg-gray-700 dark:text-gray-400">
           <tr>
             <th scope="col" className="px-6 py-4"></th>
