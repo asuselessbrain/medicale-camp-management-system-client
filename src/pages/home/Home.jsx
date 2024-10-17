@@ -1,5 +1,5 @@
 // import Spinner from "../../components/spinner/Spinner";
-import LoadUser from "./dashboard/admin/users/LoadUser";
+import ShowUser from "./dashboard/admin/users/ShowUser";
 import PopularCamp from "./popularCamp/PopularCamp";
 // import AddCamp from "./dashboard/organizer/addCamp/AddCamp";
 // import MyAddedCamp from "./dashboard/organizer/myAddedCamp/MyAddedCamp";
@@ -10,7 +10,7 @@ const Home = () => {
     <div>
       {/* <Spinner /> */}
       <Slider />
-      <LoadUser />
+      <ShowUser />
       {/* <AddCamp /> */}
       {/* <MyAddedCamp /> */}
       <PopularCamp />
