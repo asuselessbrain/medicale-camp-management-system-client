@@ -4,10 +4,10 @@ import Title from "../../components/shared/Title";
 import CampCard from "../../components/campCard/CampCard";
 import Spinner from "../../components/spinner/Spinner";
 import PaginationDesign from "../../components/peginationDesign/PaginationDesign";
-import SearchBar from "../../components/searchBar/SearchBar";
 import { useState } from "react";
 import ResetBtn from "../../components/resetBtn/ResetBtn";
 import NoCampFound from "../../components/noCampFound/NoCampFound";
+import SearchBar from "../home/dashboard/admin/users/SearchBar";
 
 const AvailableCamp = () => {
   const axiosPublic = useAxiosPublic();
@@ -17,7 +17,13 @@ const AvailableCamp = () => {
   const [currentPage, setCurrentPage] = useState(0);
 
   const { data: availableCamp = [], isLoading } = useQuery({
-    queryKey: ["availableCamp", search, searchLocation,currentPage,numberOfCampPerPage],
+    queryKey: [
+      "availableCamp",
+      search,
+      searchLocation,
+      currentPage,
+      numberOfCampPerPage,
+    ],
     queryFn: async () => {
       const { data } = await axiosPublic(
         `/all-camp?search=${search}&searchLocation=${searchLocation}&currentPage=${currentPage}&numberOfCampPerPage=${numberOfCampPerPage}`
@@ -69,7 +75,6 @@ const AvailableCamp = () => {
 
     const searchResult = e.target.search_bar.value;
     setSearch(searchResult);
-    console.log(searchResult);
   };
   const handelLocation = (e) => {
     e.preventDefault();
@@ -86,10 +91,20 @@ const AvailableCamp = () => {
     <div className="p-4">
       <Title title="Available Camp" />
       <div className="flex items-center justify-between mb-10 gap-6">
-        <SearchBar
-          handleSearch={handleSearch}
-          handelLocation={handelLocation}
-        />
+        <div className="flex flex-col lg:flex-row items-center gap-6 justify-between flex-1">
+          <SearchBar
+            handleSearchKeyword={handleSearch}
+            label="Search by Camp Name"
+            placeholder="Enter your Camp Name"
+            id="search_bar"
+          />
+          <SearchBar
+            handleSearchKeyword={handelLocation}
+            label="Search by Location"
+            placeholder="Enter your Location"
+            id="searchLocation"
+          />
+        </div>
         <ResetBtn handleReset={handleReset} />
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">

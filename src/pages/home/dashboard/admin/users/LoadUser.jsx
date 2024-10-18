@@ -48,9 +48,9 @@ const LoadUser = ({ users, refetch }) => {
   );
 };
 
-// LoadUser.propTypes = {
-//   users: PropTypes.array.isRequired,
-//   refetch: PropTypes.func.isRequired,
-// };
+LoadUser.propTypes = {
+  users: PropTypes.array.isRequired,
+  refetch: PropTypes.func.isRequired,
+};
 
 export default LoadUser;
