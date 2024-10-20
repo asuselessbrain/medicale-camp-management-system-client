@@ -8,6 +8,7 @@ import { useState } from "react";
 import ResetBtn from "../../components/resetBtn/ResetBtn";
 import NoCampFound from "../../components/noCampFound/NoCampFound";
 import SearchBar from "../home/dashboard/admin/users/SearchBar";
+import Sorting from "../../components/sorting/Sorting";
 
 const AvailableCamp = () => {
   const axiosPublic = useAxiosPublic();
@@ -91,7 +92,7 @@ const AvailableCamp = () => {
     <div className="p-4">
       <Title title="Available Camp" />
       <div className="flex items-center justify-between mb-10 gap-6">
-        <div className="flex flex-col lg:flex-row items-center gap-6 justify-between flex-1">
+        <div className="flex flex-col md:flex-row items-center gap-6 justify-between flex-1">
           <SearchBar
             handleSearchKeyword={handleSearch}
             label="Search by Camp Name"
@@ -105,6 +106,7 @@ const AvailableCamp = () => {
             id="searchLocation"
           />
         </div>
+        <Sorting />
         <ResetBtn handleReset={handleReset} />
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
