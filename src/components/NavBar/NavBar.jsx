@@ -33,7 +33,8 @@ const NavBar = () => {
           <ul className="flex-1 flex justify-center items-center gap-12 max-lg:hidden">
             {navLinks.map((item) => (
               <li key={item.label}>
-                <Link to={item.to}
+                <Link
+                  to={item.to}
                   className="font-montserrat leading-normal text-lg text-slate-gray"
                 >
                   {item.label}
@@ -67,59 +68,56 @@ const NavBar = () => {
           )}
         </nav>
       </header>
-      {isMenuOpen && (
-        <div>
-          <nav className="fixed w-2/3 top-0 right-0 left-0 z-10 bottom-0 lg:bottom-auto bg-slate-100">
-            <div
-              className="hidden max-lg:block fixed right-0  px-4 py-8 cursor-pointer"
-              onClick={() => {
-                setIsMenuOpen(!isMenuOpen);
-              }}
-            >
-              <AiOutlineClose className="text-4xl text-white" />
-            </div>
+        <nav className={`fixed w-2/3 ${isMenuOpen? 'top-0 right-0 left-0 bottom-0 lg:bottom-auto' : 'top-0 right-0 bottom-0 -left-full'} duration-1000 z-10  bg-slate-100`}>
+          <div
+            className="hidden max-lg:block fixed right-0 md:right-4 -top-2  px-4 py-8 cursor-pointer"
+            onClick={() => {
+              setIsMenuOpen(!isMenuOpen);
+            }}
+          >
+            <AiOutlineClose className={`text-4xl text-white ${isMenuOpen? '' : 'hidden'}`} />
+          </div>
 
-            <ul className=" lg:hidden h-full p-4">
-              <li className="text-2xl mb-4 font-bold">
-                <Link to="/" className="flex items-center gap-2">
-                  <img src={logo} className="h-12" alt="" />
-                  <p>MediCare</p>
+          <ul className=" lg:hidden h-full p-4">
+            <li className="text-2xl mb-4 font-bold">
+              <Link to="/" className="flex items-center gap-2">
+                <img src={logo} className="h-12" alt="" />
+                <p>MediCare</p>
+              </Link>
+            </li>
+            {navLinks.map((item) => (
+              <li
+                key={item.label}
+                onClick={() => setIsMenuOpen(false)}
+                className="my-2"
+              >
+                <Link
+                  to={item.to}
+                  className="font-montserrat leading-normal text-lg text-slate-gray"
+                >
+                  {item.label}
                 </Link>
               </li>
-              {navLinks.map((item) => (
-                <li
-                  key={item.label}
-                  onClick={() => setIsMenuOpen(false)}
-                  className="my-2"
-                >
-                  <Link to={item.to}
-                    className="font-montserrat leading-normal text-lg text-slate-gray"
-                  >
-                    {item.label}
-                  </Link>
-                </li>
-              ))}
+            ))}
 
-              <li onClick={() => setIsMenuOpen(false)}>
-                {user ? (
-                  <button
-                    onClick={handleLogOut}
-                    className="font-montserrat leading-normal text-lg text-slate-gray bg-red-500 px-4 py-3 rounded-lg list-none"
-                  >
-                    Sign Out
+            <li onClick={() => setIsMenuOpen(false)}>
+              {user ? (
+                <button
+                  onClick={handleLogOut}
+                  className="font-montserrat leading-normal text-lg text-slate-gray bg-red-500 px-4 py-3 rounded-lg list-none"
+                >
+                  Sign Out
+                </button>
+              ) : (
+                <Link to="/sign-in">
+                  <button className="font-montserrat leading-normal text-lg text-slate-gray bg-green-400 px-4 py-3 rounded-lg list-none">
+                    Join US
                   </button>
-                ) : (
-                  <Link to="/sign-in">
-                    <button className="font-montserrat leading-normal text-lg text-slate-gray bg-green-400 px-4 py-3 rounded-lg list-none">
-                      Join US
-                    </button>
-                  </Link>
-                )}
-              </li>
-            </ul>
-          </nav>
-        </div>
-      )}
+                </Link>
+              )}
+            </li>
+          </ul>
+        </nav>
     </div>
   );
 };
