@@ -16,6 +16,7 @@ const AvailableCamp = () => {
   const [searchLocation, setSearchLocation] = useState("");
   const numberOfCampPerPage = 12;
   const [currentPage, setCurrentPage] = useState(0);
+  const [sortData, setSortData] = useState("")
 
   const { data: availableCamp = [], isLoading } = useQuery({
     queryKey: [
@@ -24,10 +25,11 @@ const AvailableCamp = () => {
       searchLocation,
       currentPage,
       numberOfCampPerPage,
+      sortData
     ],
     queryFn: async () => {
       const { data } = await axiosPublic(
-        `/all-camp?search=${search}&searchLocation=${searchLocation}&currentPage=${currentPage}&numberOfCampPerPage=${numberOfCampPerPage}`
+        `/all-camp?search=${search}&searchLocation=${searchLocation}&currentPage=${currentPage}&numberOfCampPerPage=${numberOfCampPerPage}&sortData=${sortData}`
       );
       return data;
     },
@@ -88,6 +90,13 @@ const AvailableCamp = () => {
     setSearchLocation("");
   };
 
+  const handleSorting = (e) => {
+    e.preventDefault();
+    const sortOrder = e.target.value;
+
+    setSortData(sortOrder)
+  }
+
   return (
     <div className="p-4">
       <Title title="Available Camp" />
@@ -106,7 +115,7 @@ const AvailableCamp = () => {
             id="searchLocation"
           />
         </div>
-        <Sorting />
+        <Sorting handleSorting={handleSorting} />
         <ResetBtn handleReset={handleReset} />
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
