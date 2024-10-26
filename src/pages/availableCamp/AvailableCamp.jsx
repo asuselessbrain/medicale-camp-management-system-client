@@ -3,12 +3,12 @@ import useAxiosPublic from "../../hooks/useAxiosPublic";
 import Title from "../../components/shared/Title";
 import CampCard from "../../components/campCard/CampCard";
 import Spinner from "../../components/spinner/Spinner";
-import PaginationDesign from "../../components/peginationDesign/PaginationDesign";
 import { useState } from "react";
 import ResetBtn from "../../components/resetBtn/ResetBtn";
 import NoCampFound from "../../components/noCampFound/NoCampFound";
 import SearchBar from "../home/dashboard/admin/users/SearchBar";
 import Sorting from "../../components/sorting/Sorting";
+import Pagination from "../home/dashboard/admin/users/Pagination";
 
 const AvailableCamp = () => {
   const axiosPublic = useAxiosPublic();
@@ -115,13 +115,11 @@ const AvailableCamp = () => {
         ))}
       </div>
 
-      <PaginationDesign
-        pageNumbering={pageNumbering}
+      <Pagination numberOfPageArray={pageNumbering}
         setCurrentPage={setCurrentPage}
         handleNextPage={handleNextPage}
         handlePrevPage={handlePrevPage}
-        currentPage={currentPage}
-      />
+        currentPage={currentPage} />
     </div>
   );
 };

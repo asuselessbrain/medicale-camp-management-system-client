@@ -35,7 +35,7 @@ const LoadUser = ({ users, refetch }) => {
           </tr>
         </thead>
 
-        {users.map((user, index) => (
+        {users?.map((user, index) => (
           <LoadUserRow
             key={user._id}
             user={user}
