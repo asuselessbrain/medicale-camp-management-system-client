@@ -3,12 +3,17 @@ import MyAddedCampTableBody from "./MyAddedCampTableBody";
 import useAxiosProtected from "../../../../../hooks/useAxiosProtected";
 import useAuth from "../../../../../hooks/useAuth";
 import Swal from "sweetalert2";
+import Pagination from "../../admin/users/Pagination";
+import Spinner from "../../../../../components/spinner/Spinner";
+import { useState } from "react";
 
 const MyAddedCamp = () => {
   const axiosProtected = useAxiosProtected();
   const { user } = useAuth();
+  const numberOfUsersPerPage = 10;
+  const [currentPage, setCurrentPage] = useState(0);
 
-  const { data: myAddedCamp = [], refetch } = useQuery({
+  const { data: myAddedCamp = [], refetch, isLoading } = useQuery({
     queryKey: ["myAddedCamp", user?.email],
     queryFn: async () => {
       const { data } = await axiosProtected(`/my-added-camp/${user?.email}`);
@@ -40,7 +45,37 @@ const MyAddedCamp = () => {
     });
   };
 
-  
+  const { data: userCount = 0, isPending } = useQuery({
+    queryKey: ["userCount"],
+    queryFn: async () => {
+      const { data } = await axiosProtected(`/my-added-camp-count/${user?.email}`);
+      return data.result;
+    },
+  });
+
+  const numberOfPages = Math.ceil(userCount / numberOfUsersPerPage);
+
+  const numberOfPageArray = [...Array(numberOfPages).keys()];
+
+  const handleNextPage = () => {
+    if (currentPage < numberOfPageArray.length - 1) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
+  const handlePrevPage = () => {
+    if (currentPage > 0) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
+  if(isPending){
+    return <Spinner />
+  }
+
+  if(isLoading){
+    return <Spinner />
+  }  
 
   return (
     <div className="container bg-gray-100 mx-auto p-4 rounded-xl">
@@ -95,6 +130,13 @@ const MyAddedCamp = () => {
           ))}
         </table>
       </div>
+      <Pagination
+        numberOfPageArray={numberOfPageArray}
+        setCurrentPage={setCurrentPage}
+        currentPage={currentPage}
+        handleNextPage={handleNextPage}
+        handlePrevPage={handlePrevPage}
+      />
     </div>
   );
 };

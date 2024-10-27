@@ -1,10 +1,10 @@
 import { Outlet } from "react-router-dom";
-import Sidebar from "../components/Sidebars/Sidebar";
+import OrganizerSidebar from "../components/Sidebars/OrganizerSidebar";
 
 const Dashboard = () => {
   return (
     <div className="flex justify-between gap-6">
-      <Sidebar />
+      <OrganizerSidebar />
       <div className="flex-1 m-4">
         <Outlet />
       </div>
