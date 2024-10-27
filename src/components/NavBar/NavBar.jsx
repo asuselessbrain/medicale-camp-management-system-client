@@ -24,7 +24,7 @@ const NavBar = () => {
 
   return (
     <div className="fixed z-10 w-full max-w-[1440px]">
-      <header className="sm:px-8 px-4 py-2 bg-gray-700 text-white z-10 w-full">
+      <header className="sm:px-8 px-4 py-2 bg-gray-900 bg-opacity-50 text-white z-10 w-full">
         <nav className="flex justify-between items-center">
           <Link to="/" className="flex items-center gap-2">
             <img src={logo} className="w-16" alt="logo" />

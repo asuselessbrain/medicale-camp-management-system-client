@@ -5,8 +5,8 @@ import Footer from "../components/footer/Footer";
 
 const MainLayout = () => {
   return (
-    <div className="max-w-[1440px] mx-auto">
-      <div className="h-[80px] lg:h-[80px]">
+    <div className="max-w-[1440px] md:mx-auto sm:mx-4">
+      <div>
         <NavBar />
       </div>
       <ScrollToTop />

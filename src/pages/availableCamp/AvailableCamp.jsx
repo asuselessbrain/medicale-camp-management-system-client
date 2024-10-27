@@ -9,6 +9,7 @@ import NoCampFound from "../../components/noCampFound/NoCampFound";
 import SearchBar from "../home/dashboard/admin/users/SearchBar";
 import Sorting from "../../components/sorting/Sorting";
 import Pagination from "../home/dashboard/admin/users/Pagination";
+import AvailableCampHero from "./AvailableCampHero";
 
 const AvailableCamp = () => {
   const axiosPublic = useAxiosPublic();
@@ -99,8 +100,8 @@ const AvailableCamp = () => {
   };
 
   return (
-    <div className="p-4">
-      <Title title="Available Camp" />
+    <div>
+      <AvailableCampHero />
       <div className="flex flex-col lg:flex-row items-center justify-between mb-10 gap-6">
         <div className="flex flex-col md:flex-row items-center gap-6 justify-between flex-1">
           <SearchBar
