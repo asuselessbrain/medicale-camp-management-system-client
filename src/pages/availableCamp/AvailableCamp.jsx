@@ -16,7 +16,7 @@ const AvailableCamp = () => {
   const [searchLocation, setSearchLocation] = useState("");
   const numberOfCampPerPage = 12;
   const [currentPage, setCurrentPage] = useState(0);
-  const [sortData, setSortData] = useState("")
+  const [sortData, setSortData] = useState("");
 
   const { data: availableCamp = [], isLoading } = useQuery({
     queryKey: [
@@ -25,7 +25,7 @@ const AvailableCamp = () => {
       searchLocation,
       currentPage,
       numberOfCampPerPage,
-      sortData
+      sortData,
     ],
     queryFn: async () => {
       const { data } = await axiosPublic(
@@ -44,6 +44,7 @@ const AvailableCamp = () => {
       return data.totalCamp;
     },
   });
+  console.log(availableCampNumber)
 
   const numberOfPages = Math.ceil(availableCampNumber / numberOfCampPerPage);
 
@@ -94,13 +95,13 @@ const AvailableCamp = () => {
     e.preventDefault();
     const sortOrder = e.target.value;
 
-    setSortData(sortOrder)
-  }
+    setSortData(sortOrder);
+  };
 
   return (
     <div className="p-4">
       <Title title="Available Camp" />
-      <div className="flex items-center justify-between mb-10 gap-6">
+      <div className="flex flex-col lg:flex-row items-center justify-between mb-10 gap-6">
         <div className="flex flex-col md:flex-row items-center gap-6 justify-between flex-1">
           <SearchBar
             handleSearchKeyword={handleSearch}
@@ -115,8 +116,10 @@ const AvailableCamp = () => {
             id="searchLocation"
           />
         </div>
-        <Sorting handleSorting={handleSorting} />
-        <ResetBtn handleReset={handleReset} />
+        <div className = "flex flex-row items-center gap-6 justify-between">
+          <Sorting handleSorting={handleSorting} />
+          <ResetBtn handleReset={handleReset} />
+        </div>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         {availableCamp.map((popularCamp) => (
@@ -124,11 +127,13 @@ const AvailableCamp = () => {
         ))}
       </div>
 
-      <Pagination numberOfPageArray={pageNumbering}
+      <Pagination
+        numberOfPageArray={pageNumbering}
         setCurrentPage={setCurrentPage}
         handleNextPage={handleNextPage}
         handlePrevPage={handlePrevPage}
-        currentPage={currentPage} />
+        currentPage={currentPage}
+      />
     </div>
   );
 };
