@@ -53,6 +53,7 @@ const MyAddedCamp = () => {
     },
   });
 
+
   const numberOfPages = Math.ceil(userCount / numberOfUsersPerPage);
 
   const numberOfPageArray = [...Array(numberOfPages).keys()];
@@ -107,12 +108,6 @@ const MyAddedCamp = () => {
               </th>
               <th scope="col" className="px-6 py-3">
                 H P Name
-              </th>
-              <th scope="col" className="px-6 py-3">
-                Organizer Name
-              </th>
-              <th scope="col" className="px-6 py-3">
-                Organizer Email
               </th>
               <th scope="col" className="px-6 py-3">
                 Action

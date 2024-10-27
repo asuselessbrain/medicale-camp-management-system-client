@@ -7,7 +7,7 @@ import { GiAmbulance } from "react-icons/gi";
 
 const OrganizerSidebar = () => {
   return (
-    <div className="flex flex-col items-center w-48 min-h-screen overflow-hidden text-gray-700 bg-gray-100 rounded">
+    <div className="flex flex-col items-center w-48 min-h-screen fixed overflow-hidden text-gray-700 bg-gray-100 rounded">
       <Link to="/" className="flex items-center w-full px-3 mt-3">
         <img src={logo} className="w-8" alt="logo" />
         <span className="ml-2 text-lg font-bold">MediCare</span>

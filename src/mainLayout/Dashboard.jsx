@@ -3,9 +3,9 @@ import OrganizerSidebar from "../components/Sidebars/OrganizerSidebar";
 
 const Dashboard = () => {
   return (
-    <div className="flex justify-between gap-6">
+    <div className="flex justify-between">
       <OrganizerSidebar />
-      <div className="flex-1 m-4">
+      <div className="flex-1 m-4 ml-52">
         <Outlet />
       </div>
     </div>
