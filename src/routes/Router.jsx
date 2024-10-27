@@ -6,6 +6,7 @@ import Registration from "../pages/home/registration/Registration";
 import AvailableCamp from "../pages/availableCamp/AvailableCamp";
 import CampDetails from "../pages/campDetail/CampDetails";
 import Dashboard from "../mainLayout/Dashboard";
+import AddCamp from "../pages/home/dashboard/organizer/addCamp/AddCamp";
 
 const router = createBrowserRouter([
   {
@@ -27,9 +28,13 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path: "/dashboard",
+    path: "dashboard",
     element: <Dashboard />,
-    
+    children: [
+     { path: "add-camp",
+      element:<AddCamp />
+     }
+    ],
   },
   {
     path: "/sign-in",

@@ -63,7 +63,7 @@ const AddCamp = () => {
   };
 
   return (
-    <div className="container bg-gray-50 mx-auto p-4 rounded-xl">
+    <div className="container bg-gray-100 mx-auto p-4 rounded-xl">
       {/* <!-- Page Title --> */}
       <h2 className="text-7xl mx-auto font-semibold text-center font-dancing-script mt-2 text-blue-500">
         Add a Camp
