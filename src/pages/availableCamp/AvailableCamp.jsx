@@ -1,6 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
-import Title from "../../components/shared/Title";
 import CampCard from "../../components/campCard/CampCard";
 import Spinner from "../../components/spinner/Spinner";
 import { useState } from "react";
@@ -45,7 +44,6 @@ const AvailableCamp = () => {
       return data.totalCamp;
     },
   });
-  console.log(availableCampNumber)
 
   const numberOfPages = Math.ceil(availableCampNumber / numberOfCampPerPage);
 

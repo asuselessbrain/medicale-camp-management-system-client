@@ -5,6 +5,7 @@ import Login from "../pages/home/login/Login";
 import Registration from "../pages/home/registration/Registration";
 import AvailableCamp from "../pages/availableCamp/AvailableCamp";
 import CampDetails from "../pages/campDetail/CampDetails";
+import Dashboard from "../mainLayout/Dashboard";
 
 const router = createBrowserRouter([
   {
@@ -24,6 +25,11 @@ const router = createBrowserRouter([
         element: <CampDetails />,
       },
     ],
+  },
+  {
+    path: "/dashboard",
+    element: <Dashboard />,
+    
   },
   {
     path: "/sign-in",

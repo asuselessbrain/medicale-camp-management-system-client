@@ -16,7 +16,6 @@ const PreviousCamp = () => {
     },
   });
 
-  console.log(previousCamp);
 
   if (isLoading) {
     return <Spinner />;

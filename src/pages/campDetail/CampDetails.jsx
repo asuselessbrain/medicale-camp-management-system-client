@@ -91,10 +91,10 @@ const CampDetails = () => {
 
   return (
     <div
-      style={{ minHeight: "calc(100vh - 280px)" }}
+      style={{ minHeight: "calc(100vh - 200px)" }}
       className="flex flex-col items-center justify-center p-4"
     >
-      <h2 className="text-2xl mb-6 md:mb-10 font-bold text-center">
+      <h2 className="text-2xl mb-6 md:mb-10 font-bold text-center mt-6">
         Publish Date:
         <span className="font-semibold text-xl">
           {new Date(publishDate).toLocaleString()}
