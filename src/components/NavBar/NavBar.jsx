@@ -19,7 +19,7 @@ const NavBar = () => {
     { to: "/", label: "Home" },
     { to: "/available-camp", label: "Available Camps" },
     { href: "#about-us", label: "About Us" },
-    { href: "#contact-us", label: "Contact Us" },
+    { to: "/contact", label: "Contact Us" },
   ];
 
   return (
