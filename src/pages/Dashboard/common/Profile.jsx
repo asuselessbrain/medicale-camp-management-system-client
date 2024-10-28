@@ -3,13 +3,18 @@ import useAuth from "../../../hooks/useAuth";
 import UpdateProfileForm from "./UpdateProfileForm";
 import { toast } from "react-toastify";
 import axios from "axios";
+import ResetPassword from "./ResetPassword";
 
 const Profile = () => {
-  const { user, updateUser } = useAuth();
+  const { user, updateUser, resetPassword } = useAuth();
   const [updateProfile, setUPdateProfile] = useState(false);
+  const [resetPasswordToggle, setResetPasswordToggle] = useState(false);
 
   const handleUpdateProfile = () => {
     setUPdateProfile(!updateProfile);
+  };
+  const handleResetPasswordToggle = () => {
+    setResetPasswordToggle(!resetPasswordToggle); 
   };
 
   const handleUpdate = async(e) => {
@@ -38,6 +43,12 @@ const Profile = () => {
     });
 
   }
+
+  const handleResetPassword = async()=> [
+    await resetPassword(user?.email).then(() => {
+      handleResetPasswordToggle()
+    })
+  ]
   return (
     <div className="flex justify-center items-center h-screen relative">
       <div className="bg-white shadow-lg rounded-2xl w-3/5">
@@ -81,7 +92,7 @@ const Profile = () => {
                 >
                   Update Profile
                 </button>
-                <button className="bg-[#F43F5E] px-7 py-1 rounded-lg text-white cursor-pointer hover:bg-[#af4053]">
+                <button onClick={handleResetPassword} className="bg-[#F43F5E] px-7 py-1 rounded-lg text-white cursor-pointer hover:bg-[#af4053]">
                   Change Password
                 </button>
               </div>
@@ -94,6 +105,13 @@ const Profile = () => {
           <UpdateProfileForm handleUpdate={handleUpdate} />
         </div>
       )}
+      {
+        resetPasswordToggle && (
+          <div className="absolute z-10 w-full">
+            <ResetPassword handleResetPasswordToggle={handleResetPasswordToggle} />
+          </div>
+        )
+      }
     </div>
   );
 };
