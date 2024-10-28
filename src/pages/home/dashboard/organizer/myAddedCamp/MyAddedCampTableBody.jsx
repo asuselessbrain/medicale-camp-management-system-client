@@ -17,8 +17,6 @@ const MyAddedCampTableBody = ({
     campTime,
     campLocation,
     healthcareProfessionalName,
-    organizerEmail,
-    organizerName,
   } = camp;
 
   const [showModal, setShowModal] = useState(false);

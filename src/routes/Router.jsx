@@ -10,6 +10,7 @@ import AddCamp from "../pages/home/dashboard/organizer/addCamp/AddCamp";
 import MyAddedCamp from "../pages/home/dashboard/organizer/myAddedCamp/MyAddedCamp";
 import MyRegisteredCamp from "../pages/home/dashboard/user/MyRegisteredCamp";
 import Contact from "../pages/contact/Contact";
+import Profile from "../pages/Dashboard/common/Profile";
 
 const router = createBrowserRouter([
   {
@@ -31,7 +32,7 @@ const router = createBrowserRouter([
       {
         path:"/contact",
         element: <Contact />
-      }
+      },
     ],
   },
   {
@@ -46,7 +47,10 @@ const router = createBrowserRouter([
      },
      { path: "manage-registered-camp",
       element:<MyRegisteredCamp />
-     }
+     },
+     { path: "profile",
+      element:<Profile />
+     },
     ],
   },
   {
