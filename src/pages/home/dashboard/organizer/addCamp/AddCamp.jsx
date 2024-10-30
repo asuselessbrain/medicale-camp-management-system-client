@@ -4,12 +4,14 @@ import { FileUploader } from "react-drag-drop-files";
 import useAuth from "../../../../../hooks/useAuth";
 import useAxiosProtected from "../../../../../hooks/useAxiosProtected";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 const fileTypes = ["JPG", "PNG", "GIF"];
 
 const AddCamp = () => {
   const [file, setFile] = useState(null);
   const {user} = useAuth()
   const axiosProtected = useAxiosProtected()
+  const navigate = useNavigate()
 
   const imageBbUrl = `https://api.imgbb.com/1/upload?key=${
     import.meta.env.VITE_imagebb_api
@@ -54,6 +56,7 @@ const AddCamp = () => {
 
     if(postCampRes.data.insertedId){
       toast.success("Camp Added Successfully!")
+      navigate("/dashboard/manage-camp")
     }
     
   };

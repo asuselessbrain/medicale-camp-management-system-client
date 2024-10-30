@@ -1,22 +1,29 @@
-import { useQuery } from "@tanstack/react-query";
-import MyAddedCampTableBody from "./MyAddedCampTableBody";
-import useAxiosProtected from "../../../../../hooks/useAxiosProtected";
-import useAuth from "../../../../../hooks/useAuth";
-import Swal from "sweetalert2";
-import Pagination from "../../admin/users/Pagination";
-import Spinner from "../../../../../components/spinner/Spinner";
 import { useState } from "react";
+import useAuth from "../../../../../hooks/useAuth";
+import useAxiosProtected from "../../../../../hooks/useAxiosProtected";
+import { useQuery } from "@tanstack/react-query";
+import Swal from "sweetalert2";
+import Spinner from "../../../../../components/spinner/Spinner";
+import ManageRegisteredCampBody from "./ManageRegisteredCampBody";
+import Pagination from "../../admin/users/Pagination";
+import Title from "../../../../../components/shared/Title";
 
-const MyAddedCamp = () => {
+const ManageRegisteredCamp = () => {
   const axiosProtected = useAxiosProtected();
   const { user } = useAuth();
   const numberOfUsersPerPage = 10;
   const [currentPage, setCurrentPage] = useState(0);
 
-  const { data: myAddedCamp = [], refetch, isLoading } = useQuery({
+  const {
+    data: manageMyAddedCamp = [],
+    refetch,
+    isLoading,
+  } = useQuery({
     queryKey: ["myAddedCamp", user?.email],
     queryFn: async () => {
-      const { data } = await axiosProtected(`/my-added-camp/${user?.email}`);
+      const { data } = await axiosProtected(
+        `/manage-camp-request/${user?.email}`
+      );
       return data;
     },
   });
@@ -34,7 +41,7 @@ const MyAddedCamp = () => {
       if (result.isConfirmed) {
         const res = await axiosProtected.delete(`/delete-my-camp/${id}`);
         if (res.data.deletedCount > 0) {
-          refetch()
+          refetch();
           Swal.fire({
             title: "Deleted!",
             text: "Your file has been deleted.",
@@ -48,11 +55,12 @@ const MyAddedCamp = () => {
   const { data: userCount = 0, isPending } = useQuery({
     queryKey: ["userCount"],
     queryFn: async () => {
-      const { data } = await axiosProtected(`/my-added-camp-count/${user?.email}`);
+      const { data } = await axiosProtected(
+        `/manage-camp-request-count/${user?.email}`
+      );
       return data.result;
     },
   });
-
 
   const numberOfPages = Math.ceil(userCount / numberOfUsersPerPage);
 
@@ -70,24 +78,25 @@ const MyAddedCamp = () => {
     }
   };
 
-  if(isPending){
-    return <Spinner />
+  if (isPending) {
+    return <Spinner />;
   }
 
-  if(isLoading){
-    return <Spinner />
-  }  
+  if (isLoading) {
+    return <Spinner />;
+  }
 
   return (
     <div className="container bg-gray-100 mx-auto p-4 rounded-xl">
-      <h2 className="text-7xl mx-auto font-semibold text-center font-dancing-script mt-2 mb-10 text-blue-500">
-        My Added Camp
-      </h2>
+      <Title title="Mange Registered Camp" />
       <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
         <table className="w-full text-left rtl:text-right text-gray-500 dark:text-gray-400">
           <thead className="text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
               <th scope="col" className="px-6 py-3"></th>
+              <th scope="col" className="px-6 py-3">
+                Participant Name
+              </th>
               <th scope="col" className="px-6 py-3">
                 Camp Name
               </th>
@@ -95,24 +104,21 @@ const MyAddedCamp = () => {
                 Camp Fees
               </th>
               <th scope="col" className="px-6 py-3">
-                Date
+                Contact Number
               </th>
               <th scope="col" className="px-6 py-3">
-                Time
+                Payment Status
               </th>
               <th scope="col" className="px-6 py-3">
-                Location
-              </th>
-              <th scope="col" className="px-6 py-3">
-                H P Name
+                Confirmation Status
               </th>
               <th scope="col" className="px-6 py-3">
                 Action
               </th>
             </tr>
           </thead>
-          {myAddedCamp.map((camp, index) => (
-            <MyAddedCampTableBody
+          {manageMyAddedCamp.map((camp, index) => (
+            <ManageRegisteredCampBody
               key={camp._id}
               camp={camp}
               index={index}
@@ -133,4 +139,4 @@ const MyAddedCamp = () => {
   );
 };
 
-export default MyAddedCamp;
+export default ManageRegisteredCamp;

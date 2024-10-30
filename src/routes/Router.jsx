@@ -11,6 +11,7 @@ import MyAddedCamp from "../pages/home/dashboard/organizer/myAddedCamp/MyAddedCa
 import MyRegisteredCamp from "../pages/home/dashboard/user/MyRegisteredCamp";
 import Contact from "../pages/contact/Contact";
 import Profile from "../pages/Dashboard/common/Profile";
+import ManageRegisteredCamp from "../pages/home/dashboard/organizer/manageRegisteredCamp/ManageRegisteredCamp";
 
 const router = createBrowserRouter([
   {
@@ -46,6 +47,9 @@ const router = createBrowserRouter([
       element:<MyAddedCamp />
      },
      { path: "manage-registered-camp",
+      element:<ManageRegisteredCamp />
+     },
+     { path: "my-registered-camp",
       element:<MyRegisteredCamp />
      },
      { path: "profile",

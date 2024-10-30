@@ -2,7 +2,7 @@ import { Link, NavLink, useNavigate } from "react-router-dom";
 import logo from "../../assets/images/logo.png";
 import manage from "../../assets/images/produce.png";
 import { IoMdAddCircleOutline } from "react-icons/io";
-import { MdMarkEmailRead } from "react-icons/md";
+import { MdManageHistory, MdMarkEmailRead } from "react-icons/md";
 import { GiAmbulance } from "react-icons/gi";
 import { CiLogout } from "react-icons/ci";
 import useAuth from "../../hooks/useAuth";
@@ -79,6 +79,17 @@ const OrganizerSidebar = () => {
             >
               <img src={manage} className="w-6" alt="logo" />
               <span className="ml-2 text-sm font-medium"> Manage Camps</span>
+            </NavLink>
+            <NavLink
+              to="manage-registered-camp"
+              className={({ isActive }) =>
+                isActive
+                  ? "flex items-center w-full h-12 px-3 mt-2 bg-gray-300 rounded"
+                  : "flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-300"
+              }
+            >
+              <MdManageHistory size={24} />
+              <span className="ml-2 text-sm font-medium"> Manage Registered Camps</span>
             </NavLink>
           </div>
           {/* all user same */}

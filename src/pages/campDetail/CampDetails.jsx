@@ -51,6 +51,7 @@ const CampDetails = () => {
     rating,
     healthcareProfessionalName,
     publishDate,
+    organizerEmail,
   } = campData;
 
   const campTimeArr = campTime.split("T");
@@ -69,8 +70,8 @@ const CampDetails = () => {
 
     // console.log(typeof(campFee))
 
-    const campFeeNum = parseInt(campFee)
-    console.log(typeof(campFeeNum))
+    const campFeeNum = parseInt(campFee);
+    console.log(typeof campFeeNum);
 
     const participantInfo = {
       campId: _id,
@@ -80,12 +81,15 @@ const CampDetails = () => {
       phoneNumber,
       gender,
       emergencyContact,
-      status: campFeeNum === 0 ? "Confirmed" : "Pending"
+      organizerEmail,
+      paymentStatus: campFeeNum === 0 ? "Confirmed" : "Pending",
+      confirmationStatus: campFeeNum === 0 ? "Confirmed" : "Pending",
     };
-    const {data} = await axiosProtected.post('/join-camp', participantInfo)
-    console.log(data)
-    if(data.result.insertedId && data.updatedResult.modifiedCount > 0){
-      toast.success("Registration Successful!")
+    const { data } = await axiosProtected.post("/join-camp", participantInfo);
+    console.log(data);
+    if (data.result.insertedId && data.updatedResult.modifiedCount > 0) {
+      close()
+      toast.success("Registration Successful!");
     }
   };
 

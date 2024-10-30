@@ -1,10 +1,10 @@
 import { FaRegEdit } from "react-icons/fa";
 import { MdDeleteForever } from "react-icons/md";
-import UpdateModal from "./UpdateModal";
 import { useState } from "react";
 import PropTypes from "prop-types";
+import UpdateModal from "../myAddedCamp/UpdateModal";
 
-const MyAddedCampTableBody = ({
+const ManageRegisteredCampBody = ({
   camp,
   index,
   handleDelete,
@@ -12,16 +12,15 @@ const MyAddedCampTableBody = ({
 }) => {
   const {
     _id,
-    campName,
-    campFee,
-    campTime,
-    campLocation,
-    healthcareProfessionalName,
+    participantName,
+    phoneNumber,
+    paymentStatus,
+    confirmationStatus,
+    campDetails
   } = camp;
 
   const [showModal, setShowModal] = useState(false);
 
-  const timeArray = campTime?.split("T");
 
   return (
     <tbody>
@@ -31,21 +30,21 @@ const MyAddedCampTableBody = ({
           scope="row"
           className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
         >
-          {campName}
+          {participantName}
         </th>
 
         {/* <td className="px-6 py-4">
           <img src={imageLink} className="w-12" alt="" />
         </td> */}
-        <td className="px-6 py-4">{campFee} Tk</td>
+        <td className="px-6 py-4">{campDetails?.campName} Tk</td>
         <td className="px-6 py-4">
-          {timeArray?.[0]} 
+          {campDetails?.campFee}
         </td>
         <td className="px-6 py-4">
-          {timeArray?.[1]}
+          {phoneNumber}
         </td>
-        <td className="px-6 py-4">{campLocation}</td>
-        <td className="px-6 py-4">{healthcareProfessionalName}</td>
+        <td className="px-6 py-4"><span className={`rounded-full px-3 py-2 text-gray-900 ${paymentStatus === 'Unpaid'? 'bg-red-300' : 'bg-green-300'}`}>{paymentStatus}</span></td>
+        <td className="px-6 py-4"><span className={`rounded-full px-3 py-2 text-gray-900 ${paymentStatus === 'Unpaid'? 'bg-red-300' : 'bg-green-300'}`}>{confirmationStatus}</span></td>
         <td className="px-6 py-4">
           <div className="flex items-center gap-2">
             <button
@@ -71,11 +70,11 @@ const MyAddedCampTableBody = ({
   );
 };
 
-MyAddedCampTableBody.propTypes = {
+ManageRegisteredCampBody.propTypes = {
   camp: PropTypes.object.isRequired,
   index: PropTypes.number.isRequired,
   handleDelete: PropTypes.func.isRequired,
   refetch: PropTypes.func.isRequired
 };
 
-export default MyAddedCampTableBody;
+export default ManageRegisteredCampBody;
