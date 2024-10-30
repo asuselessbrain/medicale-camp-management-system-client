@@ -82,8 +82,8 @@ const CampDetails = () => {
       gender,
       emergencyContact,
       organizerEmail,
-      paymentStatus: campFeeNum === 0 ? "Confirmed" : "Pending",
-      confirmationStatus: campFeeNum === 0 ? "Confirmed" : "Pending",
+      paymentStatus: campFeeNum === 0 ? "Paid" : "Unpaid",
+      confirmationStatus: "Pending",
     };
     const { data } = await axiosProtected.post("/join-camp", participantInfo);
     console.log(data);

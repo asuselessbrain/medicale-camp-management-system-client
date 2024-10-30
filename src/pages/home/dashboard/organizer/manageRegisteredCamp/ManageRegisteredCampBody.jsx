@@ -44,7 +44,7 @@ const ManageRegisteredCampBody = ({
           {phoneNumber}
         </td>
         <td className="px-6 py-4"><span className={`rounded-full px-3 py-2 text-gray-900 ${paymentStatus === 'Unpaid'? 'bg-red-300' : 'bg-green-300'}`}>{paymentStatus}</span></td>
-        <td className="px-6 py-4"><span className={`rounded-full px-3 py-2 text-gray-900 ${paymentStatus === 'Unpaid'? 'bg-red-300' : 'bg-green-300'}`}>{confirmationStatus}</span></td>
+        <td className="px-6 py-4"><span className={`rounded-full px-3 py-2 text-gray-900 ${confirmationStatus === 'Pending'? 'bg-red-300' : 'bg-green-300'}`}>{confirmationStatus}</span></td>
         <td className="px-6 py-4">
           <div className="flex items-center gap-2">
             <button
