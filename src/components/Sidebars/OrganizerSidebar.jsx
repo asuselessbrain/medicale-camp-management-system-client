@@ -8,11 +8,12 @@ import { CiLogout } from "react-icons/ci";
 import useAuth from "../../hooks/useAuth";
 import { toast } from "react-toastify";
 import AdminSidebar from "./AdminSidebar";
+import UserSidebar from "./UserSidebar";
 
 const OrganizerSidebar = () => {
   const { logOut } = useAuth();
   const navigate = useNavigate();
-  const role = "admin";
+  const role = "user";
 
   const handleLogout = async () => {
     try {
@@ -105,6 +106,9 @@ const OrganizerSidebar = () => {
             )}
             {
               role === 'admin' && <AdminSidebar />
+            }
+            {
+              role === 'user' && <UserSidebar />
             }
           </div>
           {/* all user same */}
