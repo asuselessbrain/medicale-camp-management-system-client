@@ -7,11 +7,12 @@ import { GiAmbulance } from "react-icons/gi";
 import { CiLogout } from "react-icons/ci";
 import useAuth from "../../hooks/useAuth";
 import { toast } from "react-toastify";
+import AdminSidebar from "./AdminSidebar";
 
 const OrganizerSidebar = () => {
-
-  const {logOut} = useAuth()
-  const navigate = useNavigate()
+  const { logOut } = useAuth();
+  const navigate = useNavigate();
+  const role = "admin";
 
   const handleLogout = async () => {
     try {
@@ -58,39 +59,53 @@ const OrganizerSidebar = () => {
               </svg>
               <span className="ml-2 text-sm font-medium">Dasboard</span>
             </NavLink>
-            <NavLink
-              to="add-camp"
-              className={({ isActive }) =>
-                isActive
-                  ? "flex items-center w-full h-12 px-3 mt-2 bg-gray-300 rounded"
-                  : "flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-300"
-              }
-            >
-              <IoMdAddCircleOutline size={24} />
-              <span className="ml-2 text-sm font-medium">Add a Camp</span>
-            </NavLink>
-            <NavLink
-              to="manage-camp"
-              className={({ isActive }) =>
-                isActive
-                  ? "flex items-center w-full h-12 px-3 mt-2 bg-gray-300 rounded"
-                  : "flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-300"
-              }
-            >
-              <img src={manage} className="w-6" alt="logo" />
-              <span className="ml-2 text-sm font-medium"> Manage Camps</span>
-            </NavLink>
-            <NavLink
-              to="manage-registered-camp"
-              className={({ isActive }) =>
-                isActive
-                  ? "flex items-center w-full h-12 px-3 mt-2 bg-gray-300 rounded"
-                  : "flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-300"
-              }
-            >
-              <MdManageHistory size={24} />
-              <span className="ml-2 text-sm font-medium"> Manage Registered Camps</span>
-            </NavLink>
+            {/* organizer sidebar */}
+            {role === "organizer" && (
+              <>
+                <NavLink
+                  to="add-camp"
+                  className={({ isActive }) =>
+                    isActive
+                      ? "flex items-center w-full h-12 px-3 mt-2 bg-gray-300 rounded"
+                      : "flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-300"
+                  }
+                >
+                  <IoMdAddCircleOutline size={24} />
+                  <span className="ml-2 text-sm font-medium">Add a Camp</span>
+                </NavLink>
+                <NavLink
+                  to="manage-camp"
+                  className={({ isActive }) =>
+                    isActive
+                      ? "flex items-center w-full h-12 px-3 mt-2 bg-gray-300 rounded"
+                      : "flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-300"
+                  }
+                >
+                  <img src={manage} className="w-6" alt="logo" />
+                  <span className="ml-2 text-sm font-medium">
+                    {" "}
+                    Manage Camps
+                  </span>
+                </NavLink>
+                <NavLink
+                  to="manage-registered-camp"
+                  className={({ isActive }) =>
+                    isActive
+                      ? "flex items-center w-full h-12 px-3 mt-2 bg-gray-300 rounded"
+                      : "flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-300"
+                  }
+                >
+                  <MdManageHistory size={24} />
+                  <span className="ml-2 text-sm font-medium">
+                    {" "}
+                    Manage Registered Camps
+                  </span>
+                </NavLink>
+              </>
+            )}
+            {
+              role === 'admin' && <AdminSidebar />
+            }
           </div>
           {/* all user same */}
           <div className="flex flex-col items-center w-full mt-2 border-t border-gray-300">
@@ -133,7 +148,8 @@ const OrganizerSidebar = () => {
       </div>
       {/* sidebar end */}
       <div className="w-full">
-        <Link to="profile"
+        <Link
+          to="profile"
           className="flex items-center justify-center w-full h-16 mt-auto bg-gray-200 hover:bg-gray-300"
         >
           <svg
@@ -153,9 +169,8 @@ const OrganizerSidebar = () => {
           <span className="ml-2 text-sm font-medium">Account</span>
         </Link>
         <button
-        onClick={handleLogout}
+          onClick={handleLogout}
           className="flex items-center text-white justify-center w-full h-12 mt-auto bg-red-600 hover:bg-red-700"
-
         >
           <CiLogout size={24} />
           <span className="ml-2 text-sm font-medium">LogOut</span>

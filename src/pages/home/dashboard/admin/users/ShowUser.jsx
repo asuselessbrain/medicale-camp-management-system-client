@@ -7,6 +7,7 @@ import useAxiosProtected from "../../../../../hooks/useAxiosProtected";
 import { useState } from "react";
 import ResetBtn from "../../../../../components/resetBtn/ResetBtn";
 import NoCampFound from "../../../../../components/noCampFound/NoCampFound";
+import Title from "../../../../../components/shared/Title";
 
 const ShowUser = () => {
   const axiosProtected = useAxiosProtected();
@@ -83,7 +84,8 @@ const ShowUser = () => {
   }
 
   return (
-    <div className="m-2">
+    <div className="container bg-gray-100 mx-auto p-4 rounded-xl">
+      <Title title="Manage User" />
       <div className="mb-6 flex items-center gap-6 justify-between">
         <div className="flex-1 gap-6 flex items-center justify-between">
           <SearchBar
