@@ -59,7 +59,7 @@ const MyRegisteredCampTableBody = ({ camp, index }) => {
             disabled={paymentStatus === "Paid"}
             className={`px-2 py-1 text-white bg-green-500 rounded`}
           >
-            Pay Now
+            Pay
           </button>
         </td>
         <td className="px-6 py-4">

@@ -107,7 +107,7 @@ const Profile = () => {
       </div>
       {updateProfile && (
         <div className="absolute z-10 w-full">
-          <UpdateProfileForm handleUpdate={handleUpdate} />
+          <UpdateProfileForm handleUpdate={handleUpdate} handleUpdateProfile={handleUpdateProfile} />
         </div>
       )}
       {
