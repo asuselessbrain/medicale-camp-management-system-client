@@ -30,8 +30,8 @@ const ManageRegisteredCampBody = ({
         {/* <td className="px-6 py-4">
           <img src={imageLink} className="w-12" alt="" />
         </td> */}
-        <td className="px-6 py-4">{campDetails?.campName} Tk</td>
-        <td className="px-6 py-4">{campDetails?.campFee}</td>
+        <td className="px-6 py-4">{campDetails?.campName}</td>
+        <td className="px-6 py-4">{campDetails?.campFee} Tk</td>
         <td className="px-6 py-4">{phoneNumber}</td>
         <td className="px-6 py-4">
           <span

@@ -7,6 +7,7 @@ import ManageRegisteredCampBody from "./ManageRegisteredCampBody";
 import Pagination from "../../admin/users/Pagination";
 import Title from "../../../../../components/shared/Title";
 import { toast } from "react-toastify";
+import TableHead from "../../../../../components/shared/TableHead";
 
 const ManageRegisteredCamp = () => {
   const axiosProtected = useAxiosProtected();
@@ -28,15 +29,17 @@ const ManageRegisteredCamp = () => {
     },
   });
 
-  const updateConfirmationStatus = async(id, value) => {
-
-    const status = value === 'confirmed' ? "Confirmed" : "Rejected";
-    const {data} = await axiosProtected.patch(`/update-confirmation-status/${id}`, {status})
-    if(data.modifiedCount>0){
-      refetch()
-      toast.success(`${status} Successfully!`)
+  const updateConfirmationStatus = async (id, value) => {
+    const status = value === "confirmed" ? "Confirmed" : "Rejected";
+    const { data } = await axiosProtected.patch(
+      `/update-confirmation-status/${id}`,
+      { status }
+    );
+    if (data.modifiedCount > 0) {
+      refetch();
+      toast.success(`${status} Successfully!`);
     }
-  }
+  };
 
   const { data: userCount = 0, isPending } = useQuery({
     queryKey: ["userCount"],
@@ -77,32 +80,15 @@ const ManageRegisteredCamp = () => {
       <Title title="Mange Registered Camp" />
       <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
         <table className="w-full text-left rtl:text-right text-gray-500 dark:text-gray-400">
-          <thead className="text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-            <tr>
-              <th scope="col" className="px-6 py-3"></th>
-              <th scope="col" className="px-6 py-3">
-                Participant Name
-              </th>
-              <th scope="col" className="px-6 py-3">
-                Camp Name
-              </th>
-              <th scope="col" className="px-6 py-3">
-                Camp Fees
-              </th>
-              <th scope="col" className="px-6 py-3">
-                Contact Number
-              </th>
-              <th scope="col" className="px-6 py-3">
-                Payment Status
-              </th>
-              <th scope="col" className="px-6 py-3">
-                Confirmation Status
-              </th>
-              <th scope="col" className="px-6 py-3">
-                Action
-              </th>
-            </tr>
-          </thead>
+          <TableHead
+            col1="Participant Name"
+            col2="Camp Name"
+            col3="Camp Fees"
+            col4="Contact Number"
+            col5="Payment Status"
+            col6="Confirmation Status"
+            col7="Action"
+          />
           {manageMyAddedCamp.map((camp, index) => (
             <ManageRegisteredCampBody
               key={camp._id}

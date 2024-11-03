@@ -4,9 +4,10 @@ import UpdateProfileForm from "./UpdateProfileForm";
 import { toast } from "react-toastify";
 import axios from "axios";
 import ResetPassword from "./ResetPassword";
+import Spinner from "../../../components/spinner/Spinner";
 
 const Profile = () => {
-  const { user, updateUser, resetPassword } = useAuth();
+  const { user, updateUser, resetPassword, loading } = useAuth();
   const [updateProfile, setUPdateProfile] = useState(false);
   const [resetPasswordToggle, setResetPasswordToggle] = useState(false);
 
@@ -49,6 +50,10 @@ const Profile = () => {
       handleResetPasswordToggle()
     })
   ]
+
+  if(loading){
+    return <Spinner />
+  }
   return (
     <div className="flex justify-center items-center h-screen relative">
       <div className="bg-white shadow-lg rounded-2xl w-3/5">

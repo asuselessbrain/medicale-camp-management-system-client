@@ -7,7 +7,6 @@ import AvailableCamp from "../pages/availableCamp/AvailableCamp";
 import CampDetails from "../pages/campDetail/CampDetails";
 import Dashboard from "../mainLayout/Dashboard";
 import AddCamp from "../pages/home/dashboard/organizer/addCamp/AddCamp";
-import MyAddedCamp from "../pages/home/dashboard/organizer/myAddedCamp/MyAddedCamp";
 import MyRegisteredCamp from "../pages/home/dashboard/user/MyRegisteredCamp";
 import Contact from "../pages/contact/Contact";
 import Profile from "../pages/Dashboard/common/Profile";
@@ -44,20 +43,19 @@ const router = createBrowserRouter([
      { path: "add-camp",
       element:<AddCamp />
      },
-     { path: "manage-camp",
-      element:<MyAddedCamp />
-     },
      { path: "manage-registered-camp",
       element:<ManageRegisteredCamp />
-     },
-     { path: "my-registered-camp",
-      element:<MyRegisteredCamp />
      },
      { path: "profile",
       element:<Profile />
      },
+    //  admin route
      { path: "manage-user",
       element:<ShowUser />
+     },
+     //  user route
+     { path: "my-registered-camp",
+      element:<MyRegisteredCamp />
      },
     ],
   },

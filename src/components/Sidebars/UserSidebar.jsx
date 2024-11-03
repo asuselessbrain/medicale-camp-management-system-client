@@ -6,7 +6,7 @@ const UserSidebar = () => {
     return (
         <div className="w-full">
             <NavLink
-                  to="add-camp"
+                  to="my-registered-camp"
                   className={({ isActive }) =>
                     isActive
                       ? "flex items-center w-full h-12 px-3 mt-2 bg-gray-300 rounded"

@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import useAxiosProtected from "../../hooks/useAxiosProtected";
 import Spinner from "../../components/spinner/Spinner";
 import { Rating } from "@smastrom/react-rating";
@@ -18,6 +18,7 @@ const CampDetails = () => {
   const axiosProtected = useAxiosProtected();
   // const [ratings, setRating] = useState(rating);
   const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate()
 
   function open() {
     setIsOpen(true);
@@ -88,6 +89,7 @@ const CampDetails = () => {
     const { data } = await axiosProtected.post("/join-camp", participantInfo);
     console.log(data);
     if (data.result.insertedId && data.updatedResult.modifiedCount > 0) {
+      navigate("/dashboard/my-registered-camp")
       close()
       toast.success("Registration Successful!");
     }
