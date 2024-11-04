@@ -17,7 +17,7 @@ const UserSidebar = () => {
                   <span className="ml-2 text-sm font-medium">Registered Camps</span>
                 </NavLink>
                 <NavLink
-                  to="manage-camp"
+                  to="Payment-history"
                   className={({ isActive }) =>
                     isActive
                       ? "flex items-center w-full h-12 px-3 mt-2 bg-gray-300 rounded"

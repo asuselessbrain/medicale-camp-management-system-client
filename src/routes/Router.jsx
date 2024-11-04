@@ -12,6 +12,7 @@ import Contact from "../pages/contact/Contact";
 import Profile from "../pages/Dashboard/common/Profile";
 import ManageRegisteredCamp from "../pages/home/dashboard/organizer/manageRegisteredCamp/ManageRegisteredCamp";
 import ShowUser from "../pages/home/dashboard/admin/users/ShowUser";
+import PaymentHistory from "../pages/home/dashboard/user/PaymentStatus";
 
 const router = createBrowserRouter([
   {
@@ -56,6 +57,9 @@ const router = createBrowserRouter([
      //  user route
      { path: "my-registered-camp",
       element:<MyRegisteredCamp />
+     },
+     { path: "payment-history",
+      element:<PaymentHistory />
      },
     ],
   },
