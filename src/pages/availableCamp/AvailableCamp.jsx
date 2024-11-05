@@ -9,6 +9,7 @@ import SearchBar from "../home/dashboard/admin/users/SearchBar";
 import Sorting from "../../components/sorting/Sorting";
 import Pagination from "../home/dashboard/admin/users/Pagination";
 import AvailableCampHero from "./AvailableCampHero";
+import AvailablePageScaleton from "./AvailablePageScaleton";
 
 const AvailableCamp = () => {
   const axiosPublic = useAxiosPublic();
@@ -62,11 +63,11 @@ const AvailableCamp = () => {
   };
 
   if (isFetching) {
-    return <Spinner />;
+    return <AvailablePageScaleton />;
   }
 
   if (isLoading) {
-    return <Spinner />;
+    return <AvailablePageScaleton />;
   }
 
   if (availableCamp.length === 0) {
