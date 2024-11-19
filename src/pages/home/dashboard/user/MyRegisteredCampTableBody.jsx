@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 
-const MyRegisteredCampTableBody = ({ camp, index }) => {
+const MyRegisteredCampTableBody = ({ camp, index, handleModal }) => {
   const {
     // _id,
     participantName,
@@ -8,10 +8,6 @@ const MyRegisteredCampTableBody = ({ camp, index }) => {
     confirmationStatus,
     campDetailsObject,
   } = camp;
-
-  const handleOnclick = () => {
-    console.log("clicked");
-  };
 
   return (
     <tbody>
@@ -55,7 +51,7 @@ const MyRegisteredCampTableBody = ({ camp, index }) => {
         </td>
         <td className="px-6 py-4">
           <button
-            onClick={handleOnclick}
+            onClick={handleModal}
             disabled={paymentStatus === "Paid"}
             className={`px-2 py-1 text-white bg-green-500 rounded`}
           >
@@ -67,7 +63,6 @@ const MyRegisteredCampTableBody = ({ camp, index }) => {
             <p>Not Permitted</p>
           ) : (
             <button
-              onClick={handleOnclick}
               disabled={confirmationStatus === "Confirmed"}
               className={`px-2 py-1 text-white bg-red-500 rounded`}
             >Cancel</button>

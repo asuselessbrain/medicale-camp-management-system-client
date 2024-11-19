@@ -7,12 +7,19 @@ import { useState } from "react";
 import Pagination from "../admin/users/Pagination";
 import TableHead from "../../../../components/shared/TableHead";
 import MyRegisteredCampTableBody from "./MyRegisteredCampTableBody";
+import PaymentModal from "./PaymentModal";
 
 const MyRegisteredCamp = () => {
   const axiosProtected = useAxiosProtected();
   const { user } = useAuth();
   const numberOfUsersPerPage = 10;
   const [currentPage, setCurrentPage] = useState(0);
+  const [showModal, setShowModal] = useState(false);
+
+  const handleModal = () => {
+    setShowModal(!showModal);
+    console.log(showModal)
+  }
 
   const {
     data: manageMyAddedCamp = [],
@@ -83,6 +90,7 @@ const MyRegisteredCamp = () => {
               camp={camp}
               index={index}
               refetch={refetch}
+              handleModal={handleModal}
             />
           ))}
         </table>
@@ -94,6 +102,8 @@ const MyRegisteredCamp = () => {
         handleNextPage={handleNextPage}
         handlePrevPage={handlePrevPage}
       />
+
+      {showModal && <PaymentModal handleModal={handleModal} />}
 
     </div>
   );
