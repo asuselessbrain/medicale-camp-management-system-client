@@ -1,25 +1,27 @@
-import Title from "../../../../components/shared/Title";
-import Spinner from "../../../../components/spinner/Spinner";
-import { useQuery } from "@tanstack/react-query";
+import { useState } from "react";
 import useAxiosProtected from "../../../../hooks/useAxiosProtected";
 import useAuth from "../../../../hooks/useAuth";
-import { useState } from "react";
-import Pagination from "../admin/users/Pagination";
+import { useQuery } from "@tanstack/react-query";
+import Spinner from "../../../../components/spinner/Spinner";
+import Title from "../../../../components/shared/Title";
 import TableHead from "../../../../components/shared/TableHead";
 import MyRegisteredCampTableBody from "./MyRegisteredCampTableBody";
-import PaymentModal from "./PaymentModal";
+import Pagination from "../admin/users/Pagination";
 
 const MyRegisteredCamp = () => {
   const axiosProtected = useAxiosProtected();
   const { user } = useAuth();
   const numberOfUsersPerPage = 10;
   const [currentPage, setCurrentPage] = useState(0);
-  const [showModal, setShowModal] = useState(false);
+  const [selectedCampId, setSelectedCampId] = useState(null); // Track the camp ID for the modal
 
-  const handleModal = () => {
-    setShowModal(!showModal);
-    console.log(showModal)
-  }
+  const handleModal = (campId) => {
+    setSelectedCampId(campId); // Open modal for the specific camp
+  };
+
+  const closeModal = () => {
+    setSelectedCampId(null); // Close modal
+  };
 
   const {
     data: manageMyAddedCamp = [],
@@ -61,11 +63,7 @@ const MyRegisteredCamp = () => {
     }
   };
 
-  if (isPending) {
-    return <Spinner />;
-  }
-
-  if (isLoading) {
+  if (isPending || isLoading) {
     return <Spinner />;
   }
 
@@ -91,6 +89,8 @@ const MyRegisteredCamp = () => {
               index={index}
               refetch={refetch}
               handleModal={handleModal}
+              isModalOpen={selectedCampId === camp._id} // Check if this camp's modal should be open
+              closeModal={closeModal}
             />
           ))}
         </table>
@@ -102,9 +102,6 @@ const MyRegisteredCamp = () => {
         handleNextPage={handleNextPage}
         handlePrevPage={handlePrevPage}
       />
-
-      {showModal && <PaymentModal handleModal={handleModal} />}
-
     </div>
   );
 };
